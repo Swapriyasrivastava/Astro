@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   User, Bell, Mail, Sun, Globe, Package, Users, 
   CreditCard, BarChart3, Wallet, GraduationCap, 
-  Gamepad, Heart, Activity, ShoppingCart, Brain
+  Gamepad, Heart, Activity, ShoppingCart, Brain,
+  Settings, Star, LogOut
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -12,19 +13,47 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarGroup, 
   SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, 
   SidebarMenuButton, SidebarFooter, SidebarInset } from '@/components/ui/sidebar';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card } from "@/components/ui/card";
+import { Table } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { useToast } from '@/hooks/use-toast';
 import AdminDashboard from '@/components/admin/AdminDashboard';
+import AdminSettings from '@/pages/settings/AdminSettings';
+import HoroscopeManager from '@/components/admin/HoroscopeManager';
 
 const AdminPanel = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [currentView, setCurrentView] = useState('dashboard');
+  const [notifications] = useState(3); // Number of unread notifications
 
   if (!user) {
     navigate('/');
     return null;
   }
+
+  const handleMenuClick = (view) => {
+    setCurrentView(view);
+    toast({
+      title: `${view.charAt(0).toUpperCase() + view.slice(1)} View`,
+      description: `Switched to ${view} view.`,
+      duration: 2000,
+    });
+  };
+
+  const renderView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return <AdminDashboard />;
+      case 'settings':
+        return <AdminSettings />;
+      case 'horoscopes':
+        return <HoroscopeManager />;
+      default:
+        return <AdminDashboard />;
+    }
+  };
 
   return (
     <SidebarProvider defaultOpen={true}>
@@ -46,25 +75,57 @@ const AdminPanel = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton isActive tooltip="Dashboard">
+                    <SidebarMenuButton 
+                      isActive={currentView === 'dashboard'} 
+                      tooltip="Dashboard"
+                      onClick={() => handleMenuClick('dashboard')}
+                    >
                       <BarChart3 className="h-4 w-4" />
                       <span>Dashboard</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="AI">
+                    <SidebarMenuButton 
+                      isActive={currentView === 'horoscopes'} 
+                      tooltip="Horoscopes"
+                      onClick={() => handleMenuClick('horoscopes')}
+                    >
+                      <Star className="h-4 w-4" />
+                      <span>Horoscopes</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      tooltip="AI"
+                      onClick={() => toast({
+                        title: "AI Features",
+                        description: "AI content generation is coming soon."
+                      })}
+                    >
                       <Brain className="h-4 w-4" />
                       <span>AI</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="CRM">
+                    <SidebarMenuButton 
+                      tooltip="CRM"
+                      onClick={() => toast({
+                        title: "Customer Management",
+                        description: "Customer relationship tools are coming soon."
+                      })}
+                    >
                       <Users className="h-4 w-4" />
                       <span>CRM</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="eCommerce">
+                    <SidebarMenuButton 
+                      tooltip="eCommerce"
+                      onClick={() => toast({
+                        title: "eCommerce",
+                        description: "Online store management coming soon."
+                      })}
+                    >
                       <ShoppingCart className="h-4 w-4" />
                       <span>eCommerce</span>
                     </SidebarMenuButton>
@@ -78,43 +139,85 @@ const AdminPanel = () => {
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="Cryptocurrency">
+                    <SidebarMenuButton 
+                      tooltip="Cryptocurrency"
+                      onClick={() => toast({
+                        title: "Cryptocurrency",
+                        description: "Crypto payment options coming soon."
+                      })}
+                    >
                       <CreditCard className="h-4 w-4" />
                       <span>Cryptocurrency</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="Investment">
+                    <SidebarMenuButton 
+                      tooltip="Investment"
+                      onClick={() => toast({
+                        title: "Investment Tools",
+                        description: "Financial analytics coming soon."
+                      })}
+                    >
                       <Wallet className="h-4 w-4" />
                       <span>Investment</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="LMS">
+                    <SidebarMenuButton 
+                      tooltip="LMS"
+                      onClick={() => toast({
+                        title: "Learning Management",
+                        description: "Educational content tools coming soon."
+                      })}
+                    >
                       <GraduationCap className="h-4 w-4" />
                       <span>LMS</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="NFT & Gaming">
+                    <SidebarMenuButton 
+                      tooltip="NFT & Gaming"
+                      onClick={() => toast({
+                        title: "NFT Management",
+                        description: "Digital asset tools coming soon."
+                      })}
+                    >
                       <Gamepad className="h-4 w-4" />
                       <span>NFT & Gaming</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="Medical">
+                    <SidebarMenuButton 
+                      tooltip="Medical"
+                      onClick={() => toast({
+                        title: "Medical Services",
+                        description: "Health & wellness features coming soon."
+                      })}
+                    >
                       <Heart className="h-4 w-4" />
                       <span>Medical</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="Analytics">
+                    <SidebarMenuButton 
+                      tooltip="Analytics"
+                      onClick={() => toast({
+                        title: "Advanced Analytics",
+                        description: "Detailed reporting tools coming soon."
+                      })}
+                    >
                       <Activity className="h-4 w-4" />
                       <span>Analytics</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="POS & Inventory">
+                    <SidebarMenuButton 
+                      tooltip="POS & Inventory"
+                      onClick={() => toast({
+                        title: "Inventory System",
+                        description: "Stock management tools coming soon."
+                      })}
+                    >
                       <Package className="h-4 w-4" />
                       <span>POS & Inventory</span>
                     </SidebarMenuButton>
@@ -124,11 +227,27 @@ const AdminPanel = () => {
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel>Applications</SidebarGroupLabel>
+              <SidebarGroupLabel>System</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton tooltip="Email">
+                    <SidebarMenuButton 
+                      isActive={currentView === 'settings'}
+                      tooltip="Settings"
+                      onClick={() => handleMenuClick('settings')}
+                    >
+                      <Settings className="h-4 w-4" />
+                      <span>Settings</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      tooltip="Email"
+                      onClick={() => toast({
+                        title: "Email System",
+                        description: "Communication tools coming soon."
+                      })}
+                    >
                       <Mail className="h-4 w-4" />
                       <span>Email</span>
                     </SidebarMenuButton>
@@ -143,9 +262,9 @@ const AdminPanel = () => {
               <Button
                 onClick={logout}
                 variant="outline"
-                className="w-full justify-start text-sidebar-foreground"
+                className="w-full justify-start text-sidebar-foreground hover:bg-cosmic-accent/20"
               >
-                <User className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
               </Button>
             </div>
@@ -158,31 +277,68 @@ const AdminPanel = () => {
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
-                  <span className="text-xl font-bold text-cosmic-light text-glow">Dashboard</span>
+                  <span className="text-xl font-bold text-cosmic-light text-glow">
+                    {currentView.charAt(0).toUpperCase() + currentView.slice(1)}
+                  </span>
                   <div className="ml-4 relative">
                     <Input 
                       type="text" 
                       placeholder="Search..." 
                       className="w-60 bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                      onChange={() => toast({ title: "Search", description: "Search functionality coming soon" })}
                     />
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-4">
-                  <Button variant="ghost" size="icon" className="relative animate-fade-in hover:bg-cosmic-accent/20">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="relative animate-fade-in hover:bg-cosmic-accent/20"
+                    onClick={() => toast({ 
+                      title: "Language Settings", 
+                      description: "Switch between available languages" 
+                    })}
+                  >
                     <Globe className="text-cosmic-light" />
                   </Button>
                   
-                  <Button variant="ghost" size="icon" className="relative animate-fade-in hover:bg-cosmic-accent/20">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="relative animate-fade-in hover:bg-cosmic-accent/20"
+                    onClick={() => toast({ 
+                      title: "Notifications", 
+                      description: "You have 3 unread notifications" 
+                    })}
+                  >
                     <Bell className="text-cosmic-light" />
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
+                    {notifications > 0 && (
+                      <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
+                    )}
                   </Button>
                   
-                  <Button variant="ghost" size="icon" className="animate-fade-in hover:bg-cosmic-accent/20">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="animate-fade-in hover:bg-cosmic-accent/20"
+                    onClick={() => toast({ 
+                      title: "Messages", 
+                      description: "No new messages" 
+                    })}
+                  >
                     <Mail className="text-cosmic-light" />
                   </Button>
                   
-                  <Button variant="ghost" size="icon" className="animate-fade-in hover:bg-cosmic-accent/20">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="animate-fade-in hover:bg-cosmic-accent/20"
+                    onClick={() => toast({ 
+                      title: "Theme Settings", 
+                      description: "Toggle between light and dark mode" 
+                    })}
+                  >
                     <Sun className="text-cosmic-light" />
                   </Button>
                   
@@ -197,6 +353,12 @@ const AdminPanel = () => {
                       <div className="cosmic-glass py-2 rounded-md shadow-xl">
                         <div className="px-4 py-2 text-sm text-cosmic-light">{user.username}</div>
                         <div className="border-t border-cosmic-light/20"></div>
+                        <button
+                          onClick={() => handleMenuClick('settings')}
+                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-accent/20 transition-colors"
+                        >
+                          Settings
+                        </button>
                         <button
                           onClick={logout}
                           className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-accent/20 transition-colors"
@@ -213,7 +375,7 @@ const AdminPanel = () => {
 
           {/* Main Content */}
           <div className="container mx-auto px-4 py-6">
-            <AdminDashboard />
+            {renderView()}
           </div>
         </SidebarInset>
       </div>
