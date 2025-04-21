@@ -5,7 +5,7 @@ import {
   User, Bell, Mail, Sun, Globe, Package, Users, 
   CreditCard, BarChart3, Wallet, GraduationCap, 
   Gamepad, Heart, Activity, ShoppingCart, Brain,
-  Settings, Star, LogOut
+  Settings, Star, LogOut, FileText
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -13,13 +13,14 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarGroup, 
   SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, 
   SidebarMenuButton, SidebarFooter, SidebarInset } from '@/components/ui/sidebar';
-import { Card } from "@/components/ui/card";
-import { Table } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { useToast } from '@/hooks/use-toast';
 import AdminDashboard from '@/components/admin/AdminDashboard';
-import AdminSettings from '@/pages/settings/AdminSettings';
 import HoroscopeManager from '@/components/admin/HoroscopeManager';
+import UserManager from '@/components/admin/UserManager';
+import OrderManager from '@/components/admin/OrderManager';
+import ContentManager from '@/components/admin/ContentManager';
+import AdminSettings from '@/pages/settings/AdminSettings';
 
 const AdminPanel = () => {
   const { user, logout } = useAuth();
@@ -50,6 +51,12 @@ const AdminPanel = () => {
         return <AdminSettings />;
       case 'horoscopes':
         return <HoroscopeManager />;
+      case 'users':
+        return <UserManager />;
+      case 'orders':
+        return <OrderManager />;
+      case 'content':
+        return <ContentManager />;
       default:
         return <AdminDashboard />;
     }
@@ -86,6 +93,36 @@ const AdminPanel = () => {
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton 
+                      isActive={currentView === 'users'} 
+                      tooltip="Users"
+                      onClick={() => handleMenuClick('users')}
+                    >
+                      <Users className="h-4 w-4" />
+                      <span>Users</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'orders'} 
+                      tooltip="Orders"
+                      onClick={() => handleMenuClick('orders')}
+                    >
+                      <ShoppingCart className="h-4 w-4" />
+                      <span>Orders</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'content'} 
+                      tooltip="Content"
+                      onClick={() => handleMenuClick('content')}
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span>Content</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
                       isActive={currentView === 'horoscopes'} 
                       tooltip="Horoscopes"
                       onClick={() => handleMenuClick('horoscopes')}
@@ -104,30 +141,6 @@ const AdminPanel = () => {
                     >
                       <Brain className="h-4 w-4" />
                       <span>AI</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="CRM"
-                      onClick={() => toast({
-                        title: "Customer Management",
-                        description: "Customer relationship tools are coming soon."
-                      })}
-                    >
-                      <Users className="h-4 w-4" />
-                      <span>CRM</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="eCommerce"
-                      onClick={() => toast({
-                        title: "eCommerce",
-                        description: "Online store management coming soon."
-                      })}
-                    >
-                      <ShoppingCart className="h-4 w-4" />
-                      <span>eCommerce</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
