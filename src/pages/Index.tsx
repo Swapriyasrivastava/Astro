@@ -18,33 +18,31 @@ const Index = () => {
   }, [user, navigate]);
   
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden flex flex-col justify-center items-center">
       <StarField />
       
-      <div className="container mx-auto px-4 pt-32 pb-20">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <div className="animate-float mb-8">
-            <div className="h-32 w-32 rounded-full bg-cosmic-accent/20 flex items-center justify-center">
-              <span className="text-5xl">✨</span>
-            </div>
+      <div className="container mx-auto px-4 text-center max-w-3xl">
+        <div className="animate-float mb-8">
+          <div className="h-32 w-32 rounded-full bg-cosmic-accent/20 flex items-center justify-center mx-auto">
+            <span className="text-5xl">✨</span>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cosmic-light text-glow mb-6 animate-fade-in">
-            Astral Admin Portal
-          </h1>
-          
-          <p className="text-lg md:text-xl text-cosmic-light/80 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            Enter the cosmic realm to manage your celestial dashboard.
-          </p>
-          
-          <Button
-            onClick={() => setIsAuthModalOpen(true)}
-            className="bg-cosmic-accent hover:bg-cosmic text-cosmic-dark font-semibold px-8 py-6 text-lg animate-fade-in"
-            style={{ animationDelay: "0.3s" }}
-          >
-            Access Portal
-          </Button>
         </div>
+        
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cosmic-light text-glow mb-6 animate-fade-in">
+          Astral Admin Portal
+        </h1>
+        
+        <p className="text-lg md:text-xl text-cosmic-light/80 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          Enter the cosmic realm to manage your celestial dashboard.
+        </p>
+        
+        <Button
+          onClick={() => setIsAuthModalOpen(true)}
+          className="bg-cosmic-accent hover:bg-cosmic text-cosmic-dark font-semibold px-8 py-6 text-lg animate-fade-in"
+          style={{ animationDelay: "0.3s" }}
+        >
+          Access Portal
+        </Button>
       </div>
 
       <AuthModal 
@@ -57,3 +55,4 @@ const Index = () => {
 };
 
 export default Index;
+

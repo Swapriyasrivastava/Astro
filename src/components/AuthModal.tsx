@@ -45,7 +45,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // In a real app, validate security answers here
       await resetPassword(email);
       setActiveTab("login");
     } catch (error) {
@@ -58,13 +57,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="cosmic-glass max-w-md w-full p-6 animate-fade-in relative overflow-hidden">
-        <div className="absolute inset-0 bg-cosmic-gradient opacity-10"></div>
+        <div className="absolute inset-0 bg-cosmic-gradient opacity-10 animate-pulse"></div>
         
         <DialogHeader className="relative z-10">
           <DialogTitle className="flex flex-col items-center gap-4">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse-star">
-                <Sparkles className="w-8 h-8 text-cosmic-accent" />
+                <Sparkles className="w-8 h-8 text-cosmic-accent absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="animate-float">
                 <div className="h-16 w-16 rounded-full bg-cosmic-accent/20 flex items-center justify-center">
@@ -224,3 +223,4 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
 };
 
 export default AuthModal;
+
