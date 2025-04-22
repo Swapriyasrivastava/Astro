@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  User, Bell, Mail, Sun, Globe, Package, Users, 
-  CreditCard, BarChart3, Wallet, GraduationCap, 
-  Gamepad, Heart, Activity, ShoppingCart, Brain,
-  Settings, Star, LogOut, FileText
+  User, Bell, Mail, Sun, FileText, Users, 
+  Package, Settings, Star, LogOut, 
+  LayoutDashboard, Book, Contact, CreditCard
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -21,6 +20,11 @@ import UserManager from '@/components/admin/UserManager';
 import OrderManager from '@/components/admin/OrderManager';
 import ContentManager from '@/components/admin/ContentManager';
 import AdminSettings from '@/pages/settings/AdminSettings';
+import KundliManager from '@/components/admin/KundliManager';
+import PaymentManager from '@/components/admin/PaymentManager';
+import AboutPage from '@/pages/About';
+import BlogPage from '@/pages/Blog';
+import ContactPage from '@/pages/Contact';
 
 const AdminPanel = () => {
   const { user, logout } = useAuth();
@@ -57,6 +61,16 @@ const AdminPanel = () => {
         return <OrderManager />;
       case 'content':
         return <ContentManager />;
+      case 'kundli':
+        return <KundliManager />;
+      case 'payments':
+        return <PaymentManager />;
+      case 'about':
+        return <AboutPage />;
+      case 'blog':
+        return <BlogPage />;
+      case 'contact':
+        return <ContactPage />;
       default:
         return <AdminDashboard />;
     }
@@ -87,7 +101,7 @@ const AdminPanel = () => {
                       tooltip="Dashboard"
                       onClick={() => handleMenuClick('dashboard')}
                     >
-                      <BarChart3 className="h-4 w-4" />
+                      <LayoutDashboard className="h-4 w-4" />
                       <span>Dashboard</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -107,7 +121,7 @@ const AdminPanel = () => {
                       tooltip="Orders"
                       onClick={() => handleMenuClick('orders')}
                     >
-                      <ShoppingCart className="h-4 w-4" />
+                      <Package className="h-4 w-4" />
                       <span>Orders</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -131,18 +145,6 @@ const AdminPanel = () => {
                       <span>Horoscopes</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="AI"
-                      onClick={() => toast({
-                        title: "AI Features",
-                        description: "AI content generation is coming soon."
-                      })}
-                    >
-                      <Brain className="h-4 w-4" />
-                      <span>AI</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
@@ -153,86 +155,78 @@ const AdminPanel = () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton 
-                      tooltip="Cryptocurrency"
-                      onClick={() => toast({
-                        title: "Cryptocurrency",
-                        description: "Crypto payment options coming soon."
-                      })}
+                      isActive={currentView === 'content'} 
+                      tooltip="Content Manager"
+                      onClick={() => handleMenuClick('content')}
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span>Content Manager</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+            
+            <SidebarGroup>
+              <SidebarGroupLabel>Pages</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'about'} 
+                      tooltip="About"
+                      onClick={() => handleMenuClick('about')}
+                    >
+                      <Book className="h-4 w-4" />
+                      <span>About</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'blog'} 
+                      tooltip="Blog"
+                      onClick={() => handleMenuClick('blog')}
+                    >
+                      <FileText className="h-4 w-4" />
+                      <span>Blog</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'contact'} 
+                      tooltip="Contact"
+                      onClick={() => handleMenuClick('contact')}
+                    >
+                      <Contact className="h-4 w-4" />
+                      <span>Contact</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+
+            <SidebarGroup>
+              <SidebarGroupLabel>Application</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'kundli'} 
+                      tooltip="Kundli Manager"
+                      onClick={() => handleMenuClick('kundli')}
+                    >
+                      <Star className="h-4 w-4" />
+                      <span>Kundli Manager</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'payments'} 
+                      tooltip="Payment Options"
+                      onClick={() => handleMenuClick('payments')}
                     >
                       <CreditCard className="h-4 w-4" />
-                      <span>Cryptocurrency</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="Investment"
-                      onClick={() => toast({
-                        title: "Investment Tools",
-                        description: "Financial analytics coming soon."
-                      })}
-                    >
-                      <Wallet className="h-4 w-4" />
-                      <span>Investment</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="LMS"
-                      onClick={() => toast({
-                        title: "Learning Management",
-                        description: "Educational content tools coming soon."
-                      })}
-                    >
-                      <GraduationCap className="h-4 w-4" />
-                      <span>LMS</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="NFT & Gaming"
-                      onClick={() => toast({
-                        title: "NFT Management",
-                        description: "Digital asset tools coming soon."
-                      })}
-                    >
-                      <Gamepad className="h-4 w-4" />
-                      <span>NFT & Gaming</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="Medical"
-                      onClick={() => toast({
-                        title: "Medical Services",
-                        description: "Health & wellness features coming soon."
-                      })}
-                    >
-                      <Heart className="h-4 w-4" />
-                      <span>Medical</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="Analytics"
-                      onClick={() => toast({
-                        title: "Advanced Analytics",
-                        description: "Detailed reporting tools coming soon."
-                      })}
-                    >
-                      <Activity className="h-4 w-4" />
-                      <span>Analytics</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="POS & Inventory"
-                      onClick={() => toast({
-                        title: "Inventory System",
-                        description: "Stock management tools coming soon."
-                      })}
-                    >
-                      <Package className="h-4 w-4" />
-                      <span>POS & Inventory</span>
+                      <span>Payment Options</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -286,7 +280,7 @@ const AdminPanel = () => {
 
         <SidebarInset>
           {/* Navbar */}
-          <nav className="cosmic-glass border-b border-cosmic-light/20 sticky top-0 z-50">
+          <nav className="cosmic-glass bg-cosmic-dark/60 border-b border-cosmic-light/20 sticky top-0 z-50">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
@@ -304,18 +298,6 @@ const AdminPanel = () => {
                 </div>
                 
                 <div className="flex items-center space-x-4">
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="relative animate-fade-in hover:bg-cosmic-accent/20"
-                    onClick={() => toast({ 
-                      title: "Language Settings", 
-                      description: "Switch between available languages" 
-                    })}
-                  >
-                    <Globe className="text-cosmic-light" />
-                  </Button>
-                  
                   <Button 
                     variant="ghost" 
                     size="icon" 

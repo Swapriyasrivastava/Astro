@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,7 +21,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [securityAnswer, setSecurityAnswer] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
   const { login, resetPassword } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -38,9 +42,25 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
 
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate passwords match
+    if (newPassword !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+    
+    // Validate password length
+    if (newPassword.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      return;
+    }
+    
+    setPasswordError("");
     setIsSubmitting(true);
+    
     try {
-      await resetPassword(email);
+      // Modified to pass the new password and security answer
+      await resetPassword(email, newPassword, securityAnswer);
       setActiveTab("login");
     } catch (error) {
       // Error handled in context
@@ -180,6 +200,41 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                 </div>
               </div>
               
+              <div className="space-y-2">
+                <Label htmlFor="new-password" className="text-cosmic-light">New Password</Label>
+                <div className="relative group">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Input 
+                    id="new-password"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password" className="text-cosmic-light">Confirm New Password</Label>
+                <div className="relative group">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Input 
+                    id="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    required
+                  />
+                </div>
+                {passwordError && (
+                  <p className="text-red-400 text-sm">{passwordError}</p>
+                )}
+              </div>
+              
               <Button 
                 type="submit" 
                 className="w-full bg-cosmic-accent hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300"
@@ -188,7 +243,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
                     <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"/>
-                    Verifying...
+                    Resetting...
                   </span>
                 ) : (
                   'Reset Password'

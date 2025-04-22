@@ -13,7 +13,7 @@ type AuthContextType = {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
-  resetPassword: (email: string) => Promise<void>;
+  resetPassword: (email: string, newPassword: string, securityAnswer: string) => Promise<void>;
   register: (email: string, password: string, username: string) => Promise<void>;
 };
 
@@ -26,12 +26,14 @@ const MOCK_USERS = [
     password: 'admin123',
     username: 'Cosmic Admin',
     isAdmin: true,
+    securityAnswer: 'new york'
   },
   {
     email: 'user@astral.com',
     password: 'user123',
     username: 'Star Gazer',
     isAdmin: false,
+    securityAnswer: 'london'
   },
 ];
 
@@ -57,7 +59,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const foundUser = MOCK_USERS.find(u => u.email === email && u.password === password);
     
     if (foundUser) {
-      const { password, ...userWithoutPassword } = foundUser;
+      const { password, securityAnswer, ...userWithoutPassword } = foundUser;
       setUser(userWithoutPassword);
       localStorage.setItem('astralUser', JSON.stringify(userWithoutPassword));
       toast.success('Welcome back to the cosmos!');
@@ -100,22 +102,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     toast.success('You have returned to the cosmos');
   };
 
-  const resetPassword = async (email: string) => {
+  const resetPassword = async (email: string, newPassword: string, securityAnswer: string) => {
     setIsLoading(true);
     
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    const userExists = MOCK_USERS.some(u => u.email === email);
+    const userIndex = MOCK_USERS.findIndex(u => u.email === email);
     
-    if (!userExists) {
+    if (userIndex === -1) {
       toast.error('No cosmic traveler found with this email');
       setIsLoading(false);
       throw new Error('User not found');
     }
     
-    // In a real app, send reset email
-    toast.success('Cosmic reset link sent to your email');
+    // Check security answer
+    if (MOCK_USERS[userIndex].securityAnswer.toLowerCase() !== securityAnswer.toLowerCase()) {
+      toast.error('Security answer is incorrect');
+      setIsLoading(false);
+      throw new Error('Invalid security answer');
+    }
+    
+    // In a real app, update password in DB
+    // For demo, we'll just update the mock data
+    MOCK_USERS[userIndex].password = newPassword;
+    
+    toast.success('Your cosmic password has been reset');
     setIsLoading(false);
   };
 

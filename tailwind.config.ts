@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,37 +20,37 @@ export default {
     },
     extend: {
       colors: {
-        border: 'hsl(0 0% 14%)', // Dark border
-        input: 'hsl(0 0% 14%)', // Dark input
-        ring: 'hsl(240 3.7% 15.9%)', // Dark ring
-        background: 'hsl(240 10% 3.9%)', // Very dark background
+        border: 'hsl(0 0% 20%)', // Lighter border
+        input: 'hsl(0 0% 20%)', // Lighter input
+        ring: 'hsl(240 3.7% 25%)', // Lighter ring
+        background: 'hsl(240 10% 10%)', // Lighter background
         foreground: 'hsl(0 0% 98%)', // Light text
         primary: {
           DEFAULT: 'hsl(240 5.9% 90%)', // Light primary
           foreground: 'hsl(240 10% 3.9%)' // Dark primary text
         },
         secondary: {
-          DEFAULT: 'hsl(240 3.7% 15.9%)', // Dark secondary
+          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter secondary
           foreground: 'hsl(0 0% 98%)' // Light secondary text
         },
         destructive: {
-          DEFAULT: 'hsl(0 62.8% 30.6%)', // Red for destructive actions
+          DEFAULT: 'hsl(0 62.8% 40.6%)', // Lighter red for destructive actions
           foreground: 'hsl(0 0% 98%)'
         },
         muted: {
-          DEFAULT: 'hsl(240 3.7% 15.9%)', // Dark muted
-          foreground: 'hsl(240 5% 64.9%)' // Muted text
+          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter muted
+          foreground: 'hsl(240 5% 70%)' // Lighter muted text
         },
         accent: {
-          DEFAULT: 'hsl(240 3.7% 15.9%)', // Dark accent
+          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter accent
           foreground: 'hsl(0 0% 98%)' // Light accent text
         },
         popover: {
-          DEFAULT: 'hsl(240 10% 3.9%)', // Very dark popover
+          DEFAULT: 'hsl(240 10% 10%)', // Lighter popover
           foreground: 'hsl(0 0% 98%)' // Light popover text
         },
         card: {
-          DEFAULT: 'hsl(240 10% 3.9%)', // Very dark card
+          DEFAULT: 'hsl(240 10% 10%)', // Lighter card
           foreground: 'hsl(0 0% 98%)' // Light card text
         },
         sidebar: {
@@ -63,10 +64,10 @@ export default {
           ring: 'hsl(var(--sidebar-ring))'
         },
         cosmic: {
-          DEFAULT: '#7E69AB',
-          dark: '#1A1F2C',
-          light: '#D6BCFA',
-          accent: '#9b87f5',
+          DEFAULT: '#9179BD', // Lighter cosmic
+          dark: '#2A2F3C', // Lighter cosmic dark
+          light: '#E2D6FF', // Lighter cosmic light
+          accent: '#aa97ff', // Lighter cosmic accent
         }
       },
       borderRadius: {
@@ -114,8 +115,8 @@ export default {
         'float': 'float 6s ease-in-out infinite',
       },
       backgroundImage: {
-        'cosmic-gradient': 'linear-gradient(to right bottom, #1A1F2C, #33274F)',
-        'star-field': 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)',
+        'cosmic-gradient': 'linear-gradient(to right bottom, #2A2F3C, #43375F)', // Lighter gradient
+        'star-field': 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', // Brighter stars
       }
     }
   },
