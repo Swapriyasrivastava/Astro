@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -56,11 +55,11 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="cosmic-glass max-w-md w-full p-6 animate-fade-in relative overflow-hidden">
+      <DialogContent className="cosmic-glass max-w-md w-full p-6 animate-fade-in relative overflow-hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="absolute inset-0 bg-cosmic-gradient opacity-10 animate-pulse"></div>
         
         <DialogHeader className="relative z-10">
-          <DialogTitle className="flex flex-col items-center gap-4">
+          <DialogTitle className="flex flex-col items-center gap-2">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse-star">
                 <Sparkles className="w-8 h-8 text-cosmic-accent absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
@@ -77,7 +76,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
           </DialogTitle>
         </DialogHeader>
         
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "login" | "reset")} className="relative z-10 w-full mt-6">
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "login" | "reset")} className="relative z-10 w-full mt-4">
           <TabsList className="grid grid-cols-2 w-full bg-cosmic-dark/50">
             <TabsTrigger 
               value="login" 
@@ -223,4 +222,3 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
 };
 
 export default AuthModal;
-
