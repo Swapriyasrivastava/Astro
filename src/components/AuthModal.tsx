@@ -7,23 +7,19 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { Mail, Lock, Key, Sparkles } from "lucide-react";
 
+const securityQuestion = "In which city were you born?";
+
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultTab?: "login" | "reset";
 }
 
-const securityQuestions = [
-  "What was your first pet's name?",
-  "In which city were you born?",
-  "What was your childhood nickname?",
-];
-
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "login" }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [securityAnswers, setSecurityAnswers] = useState(["", "", ""]);
+  const [securityAnswer, setSecurityAnswer] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { login, resetPassword } = useAuth();
 
@@ -170,25 +166,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                 </div>
               </div>
               
-              {securityQuestions.map((question, index) => (
-                <div key={question} className="space-y-2">
-                  <Label htmlFor={`security-q-${index}`} className="text-cosmic-light">{question}</Label>
-                  <div className="relative group">
-                    <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
-                    <Input 
-                      id={`security-q-${index}`}
-                      value={securityAnswers[index]}
-                      onChange={(e) => {
-                        const newAnswers = [...securityAnswers];
-                        newAnswers[index] = e.target.value;
-                        setSecurityAnswers(newAnswers);
-                      }}
-                      className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
-                      required
-                    />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="security-q" className="text-cosmic-light">{securityQuestion}</Label>
+                <div className="relative group">
+                  <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Input 
+                    id="security-q"
+                    value={securityAnswer}
+                    onChange={(e) => setSecurityAnswer(e.target.value)}
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    required
+                  />
                 </div>
-              ))}
+              </div>
               
               <Button 
                 type="submit" 
