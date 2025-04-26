@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Eye, FileText, Star, User } from 'lucide-react';
+import { Eye, WhatsappIcon, Mail, Download } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 
@@ -17,17 +15,8 @@ const sampleKundlis = [
   { id: 5, name: "Vikram Joshi", birthDate: "1979-07-18", birthTime: "16:50", birthPlace: "Chennai, India", status: "completed", date: "2025-03-20" },
 ];
 
-const sampleCustomers = [
-  { id: 1, name: "Raj Sharma", email: "raj.sharma@example.com", phone: "+91 98765 43210", registeredDate: "2025-01-15", orders: 3 },
-  { id: 2, name: "Priya Patel", email: "priya.patel@example.com", phone: "+91 87654 32109", registeredDate: "2025-02-08", orders: 1 },
-  { id: 3, name: "Amit Kumar", email: "amit.kumar@example.com", phone: "+91 76543 21098", registeredDate: "2025-02-22", orders: 2 },
-  { id: 4, name: "Maya Singh", email: "maya.singh@example.com", phone: "+91 65432 10987", registeredDate: "2025-03-03", orders: 1 },
-  { id: 5, name: "Vikram Joshi", email: "vikram.joshi@example.com", phone: "+91 54321 09876", registeredDate: "2025-03-18", orders: 4 },
-];
-
 const KundliManager = () => {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("kundli-list");
   const [viewKundli, setViewKundli] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -36,113 +25,105 @@ const KundliManager = () => {
     setIsDialogOpen(true);
   };
 
+  const handleShare = (type, kundli) => {
+    switch (type) {
+      case 'whatsapp':
+        const whatsappText = `Kundli details for ${kundli.name}:\nBirth Date: ${kundli.birthDate}\nBirth Time: ${kundli.birthTime}\nBirth Place: ${kundli.birthPlace}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(whatsappText)}`, '_blank');
+        break;
+      case 'mail':
+        const mailSubject = `Kundli Report for ${kundli.name}`;
+        const mailBody = `Kundli details:\n\nName: ${kundli.name}\nBirth Date: ${kundli.birthDate}\nBirth Time: ${kundli.birthTime}\nBirth Place: ${kundli.birthPlace}`;
+        window.location.href = `mailto:?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+        break;
+      case 'download':
+        toast({
+          title: "Download Started",
+          description: `Downloading Kundli for ${kundli.name}`,
+        });
+        break;
+    }
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
-      <Card className="cosmic-glass bg-cosmic-dark/40 border-cosmic-light/10">
+      <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/10">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-cosmic-light">Kundli Manager</CardTitle>
           <CardDescription className="text-cosmic-light/80">
-            Manage kundli readings and registered customers
+            Manage and share kundli readings
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-cosmic-dark/30">
-              <TabsTrigger value="kundli-list" className="data-[state=active]:bg-cosmic-accent/20">
-                <FileText className="h-4 w-4 mr-2" />
-                Ordered Kundli List
-              </TabsTrigger>
-              <TabsTrigger value="customers" className="data-[state=active]:bg-cosmic-accent/20">
-                <User className="h-4 w-4 mr-2" />
-                Registered Customers
-              </TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="kundli-list" className="mt-4">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-cosmic-light/10 hover:bg-cosmic-dark/30">
-                    <TableHead className="text-cosmic-light/80">Name</TableHead>
-                    <TableHead className="text-cosmic-light/80">Birth Date</TableHead>
-                    <TableHead className="text-cosmic-light/80">Birth Time</TableHead>
-                    <TableHead className="text-cosmic-light/80">Birth Place</TableHead>
-                    <TableHead className="text-cosmic-light/80">Status</TableHead>
-                    <TableHead className="text-cosmic-light/80">Date</TableHead>
-                    <TableHead className="text-cosmic-light/80">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {sampleKundlis.map((kundli) => (
-                    <TableRow key={kundli.id} className="border-cosmic-light/10 hover:bg-cosmic-dark/30">
-                      <TableCell className="font-medium text-cosmic-light">{kundli.name}</TableCell>
-                      <TableCell className="text-cosmic-light">{kundli.birthDate}</TableCell>
-                      <TableCell className="text-cosmic-light">{kundli.birthTime}</TableCell>
-                      <TableCell className="text-cosmic-light">{kundli.birthPlace}</TableCell>
-                      <TableCell>
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          kundli.status === "completed" ? "bg-green-500/20 text-green-300" : 
-                          kundli.status === "in-progress" ? "bg-blue-500/20 text-blue-300" :
-                          "bg-amber-500/20 text-amber-300"
-                        }`}>
-                          {kundli.status.charAt(0).toUpperCase() + kundli.status.slice(1)}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-cosmic-light">{kundli.date}</TableCell>
-                      <TableCell>
-                        <Button 
-                          size="sm" 
-                          variant="ghost" 
-                          className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
-                          onClick={() => handleViewKundli(kundli)}
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TabsContent>
-            
-            <TabsContent value="customers" className="mt-4">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-cosmic-light/10 hover:bg-cosmic-dark/30">
-                    <TableHead className="text-cosmic-light/80">Name</TableHead>
-                    <TableHead className="text-cosmic-light/80">Email</TableHead>
-                    <TableHead className="text-cosmic-light/80">Phone</TableHead>
-                    <TableHead className="text-cosmic-light/80">Registered Date</TableHead>
-                    <TableHead className="text-cosmic-light/80">Orders</TableHead>
-                    <TableHead className="text-cosmic-light/80">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {sampleCustomers.map((customer) => (
-                    <TableRow key={customer.id} className="border-cosmic-light/10 hover:bg-cosmic-dark/30">
-                      <TableCell className="font-medium text-cosmic-light">{customer.name}</TableCell>
-                      <TableCell className="text-cosmic-light">{customer.email}</TableCell>
-                      <TableCell className="text-cosmic-light">{customer.phone}</TableCell>
-                      <TableCell className="text-cosmic-light">{customer.registeredDate}</TableCell>
-                      <TableCell className="text-cosmic-light">{customer.orders}</TableCell>
-                      <TableCell>
-                        <Button 
-                          size="sm" 
-                          variant="ghost" 
-                          className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
-                          onClick={() => toast({
-                            title: "Customer Details",
-                            description: `Viewing details for ${customer.name}`
-                          })}
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TabsContent>
-          </Tabs>
+          <Table>
+            <TableHeader>
+              <TableRow className="border-cosmic-light/10 hover:bg-cosmic-dark/20">
+                <TableHead className="text-cosmic-light/80">Name</TableHead>
+                <TableHead className="text-cosmic-light/80">Birth Date</TableHead>
+                <TableHead className="text-cosmic-light/80">Birth Time</TableHead>
+                <TableHead className="text-cosmic-light/80">Birth Place</TableHead>
+                <TableHead className="text-cosmic-light/80">Status</TableHead>
+                <TableHead className="text-cosmic-light/80">Date</TableHead>
+                <TableHead className="text-cosmic-light/80">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {sampleKundlis.map((kundli) => (
+                <TableRow key={kundli.id} className="border-cosmic-light/10 hover:bg-cosmic-dark/20">
+                  <TableCell className="font-medium text-cosmic-light">{kundli.name}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.birthDate}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.birthTime}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.birthPlace}</TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded-full text-xs ${
+                      kundli.status === "completed" ? "bg-green-500/20 text-green-300" : 
+                      kundli.status === "in-progress" ? "bg-blue-500/20 text-blue-300" :
+                      "bg-amber-500/20 text-amber-300"
+                    }`}>
+                      {kundli.status.charAt(0).toUpperCase() + kundli.status.slice(1)}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.date}</TableCell>
+                  <TableCell>
+                    <div className="flex space-x-2">
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
+                        onClick={() => handleShare('whatsapp', kundli)}
+                      >
+                        <WhatsappIcon className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
+                        onClick={() => handleShare('mail', kundli)}
+                      >
+                        <Mail className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
+                        onClick={() => handleShare('download', kundli)}
+                      >
+                        <Download className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
+                        onClick={() => handleViewKundli(kundli)}
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
       

@@ -30,7 +30,7 @@ const AdminPanel = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [currentView, setCurrentView] = useState('dashboard');
-  const [notifications] = useState(3); // Number of unread notifications
+  const [notifications] = useState(3);
 
   if (!user) {
     navigate('/');
@@ -54,16 +54,10 @@ const AdminPanel = () => {
         return <AdminSettings />;
       case 'horoscopes':
         return <HoroscopeManager />;
-      case 'users':
-        return <UserManager />;
       case 'orders':
         return <OrderManager />;
-      case 'content':
-        return <ContentManager />;
       case 'kundli':
         return <KundliManager />;
-      case 'payments':
-        return <PaymentManager />;
       case 'about':
         return <AboutPage />;
       case 'blog':
@@ -106,16 +100,6 @@ const AdminPanel = () => {
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton 
-                      isActive={currentView === 'users'} 
-                      tooltip="Users"
-                      onClick={() => handleMenuClick('users')}
-                    >
-                      <Users className="h-4 w-4" />
-                      <span>Users</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
                       isActive={currentView === 'orders'} 
                       tooltip="Orders"
                       onClick={() => handleMenuClick('orders')}
@@ -138,24 +122,6 @@ const AdminPanel = () => {
               </SidebarGroupContent>
             </SidebarGroup>
 
-            <SidebarGroup>
-              <SidebarGroupLabel>Services</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      isActive={currentView === 'content'} 
-                      tooltip="Content Manager"
-                      onClick={() => handleMenuClick('content')}
-                    >
-                      <FileText className="h-4 w-4" />
-                      <span>Content Manager</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-            
             <SidebarGroup>
               <SidebarGroupLabel>Pages</SidebarGroupLabel>
               <SidebarGroupContent>
@@ -206,16 +172,6 @@ const AdminPanel = () => {
                     >
                       <Star className="h-4 w-4" />
                       <span>Kundli Manager</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      isActive={currentView === 'payments'} 
-                      tooltip="Payment Options"
-                      onClick={() => handleMenuClick('payments')}
-                    >
-                      <CreditCard className="h-4 w-4" />
-                      <span>Payment Options</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
