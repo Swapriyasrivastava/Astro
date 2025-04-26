@@ -13,7 +13,6 @@ const sampleKundlis = [
     email: "raj.sharma@example.com",
     phone: "+91 98765 43210",
     city: "Mumbai",
-    state: "Maharashtra",
     paymentStatus: "paid",
     status: "completed", 
     date: "2025-04-01" 
@@ -24,7 +23,6 @@ const sampleKundlis = [
     email: "priya.patel@example.com",
     phone: "+91 87654 32109",
     city: "Delhi",
-    state: "Delhi",
     paymentStatus: "pending",
     status: "completed", 
     date: "2025-03-28" 
@@ -35,7 +33,6 @@ const sampleKundlis = [
     email: "amit.kumar@example.com",
     phone: "+91 76543 21098",
     city: "Bangalore",
-    state: "Karnataka",
     paymentStatus: "paid",
     status: "pending", 
     date: "2025-04-05" 
@@ -46,7 +43,6 @@ const sampleKundlis = [
     email: "maya.singh@example.com",
     phone: "+91 65432 10987",
     city: "Kolkata",
-    state: "West Bengal",
     paymentStatus: "failed",
     status: "in-progress", 
     date: "2025-04-07" 
@@ -57,7 +53,6 @@ const sampleKundlis = [
     email: "vikram.joshi@example.com",
     phone: "+91 54321 09876",
     city: "Chennai",
-    state: "Tamil Nadu",
     paymentStatus: "paid",
     status: "completed", 
     date: "2025-03-20" 
@@ -111,7 +106,6 @@ const KundliManager = () => {
                 <TableHead className="text-cosmic-light/80">Email</TableHead>
                 <TableHead className="text-cosmic-light/80">Phone</TableHead>
                 <TableHead className="text-cosmic-light/80">City</TableHead>
-                <TableHead className="text-cosmic-light/80">State</TableHead>
                 <TableHead className="text-cosmic-light/80">Payment</TableHead>
                 <TableHead className="text-cosmic-light/80">Status</TableHead>
                 <TableHead className="text-cosmic-light/80">Date</TableHead>
@@ -125,7 +119,6 @@ const KundliManager = () => {
                   <TableCell className="text-cosmic-light">{kundli.email}</TableCell>
                   <TableCell className="text-cosmic-light">{kundli.phone}</TableCell>
                   <TableCell className="text-cosmic-light">{kundli.city}</TableCell>
-                  <TableCell className="text-cosmic-light">{kundli.state}</TableCell>
                   <TableCell>
                     <span className={`px-2 py-1 rounded-full text-xs ${
                       kundli.paymentStatus === "paid" ? "bg-green-500/20 text-green-300" : 
@@ -215,10 +208,6 @@ const KundliManager = () => {
                 <div>
                   <h3 className="text-sm font-medium text-cosmic-light/70">City</h3>
                   <p className="text-cosmic-light">{viewKundli.city}</p>
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-cosmic-light/70">State</h3>
-                  <p className="text-cosmic-light">{viewKundli.state}</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-cosmic-light/70">Payment Status</h3>
