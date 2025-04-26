@@ -6,13 +6,58 @@ import { Eye, MessageSquare, Mail, Download, Star } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 
-// Sample data
+// Sample data with updated fields
 const sampleKundlis = [
-  { id: 1, name: "Raj Sharma", birthDate: "1990-05-15", birthTime: "14:30", birthPlace: "Mumbai, India", status: "completed", date: "2025-04-01" },
-  { id: 2, name: "Priya Patel", birthDate: "1985-10-22", birthTime: "08:45", birthPlace: "Delhi, India", status: "completed", date: "2025-03-28" },
-  { id: 3, name: "Amit Kumar", birthDate: "1992-02-10", birthTime: "23:15", birthPlace: "Bangalore, India", status: "pending", date: "2025-04-05" },
-  { id: 4, name: "Maya Singh", birthDate: "1988-12-03", birthTime: "11:20", birthPlace: "Kolkata, India", status: "in-progress", date: "2025-04-07" },
-  { id: 5, name: "Vikram Joshi", birthDate: "1979-07-18", birthTime: "16:50", birthPlace: "Chennai, India", status: "completed", date: "2025-03-20" },
+  { 
+    id: 1, 
+    name: "Raj Sharma", 
+    email: "raj.sharma@example.com",
+    phone: "+91 98765 43210",
+    location: "Mumbai, Maharashtra",
+    paymentStatus: "paid",
+    status: "completed", 
+    date: "2025-04-01" 
+  },
+  { 
+    id: 2, 
+    name: "Priya Patel",
+    email: "priya.patel@example.com",
+    phone: "+91 87654 32109",
+    location: "Delhi, NCR",
+    paymentStatus: "pending",
+    status: "completed", 
+    date: "2025-03-28" 
+  },
+  { 
+    id: 3, 
+    name: "Amit Kumar",
+    email: "amit.kumar@example.com",
+    phone: "+91 76543 21098",
+    location: "Bangalore, Karnataka",
+    paymentStatus: "paid",
+    status: "pending", 
+    date: "2025-04-05" 
+  },
+  { 
+    id: 4, 
+    name: "Maya Singh",
+    email: "maya.singh@example.com",
+    phone: "+91 65432 10987",
+    location: "Kolkata, West Bengal",
+    paymentStatus: "failed",
+    status: "in-progress", 
+    date: "2025-04-07" 
+  },
+  { 
+    id: 5, 
+    name: "Vikram Joshi",
+    email: "vikram.joshi@example.com",
+    phone: "+91 54321 09876",
+    location: "Chennai, Tamil Nadu",
+    paymentStatus: "paid",
+    status: "completed", 
+    date: "2025-03-20" 
+  },
 ];
 
 const KundliManager = () => {
@@ -28,12 +73,12 @@ const KundliManager = () => {
   const handleShare = (type, kundli) => {
     switch (type) {
       case 'whatsapp':
-        const whatsappText = `Kundli details for ${kundli.name}:\nBirth Date: ${kundli.birthDate}\nBirth Time: ${kundli.birthTime}\nBirth Place: ${kundli.birthPlace}`;
+        const whatsappText = `Kundli details for ${kundli.name}:\nEmail: ${kundli.email}\nPhone: ${kundli.phone}\nLocation: ${kundli.location}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(whatsappText)}`, '_blank');
         break;
       case 'mail':
         const mailSubject = `Kundli Report for ${kundli.name}`;
-        const mailBody = `Kundli details:\n\nName: ${kundli.name}\nBirth Date: ${kundli.birthDate}\nBirth Time: ${kundli.birthTime}\nBirth Place: ${kundli.birthPlace}`;
+        const mailBody = `Kundli details:\n\nName: ${kundli.name}\nEmail: ${kundli.email}\nPhone: ${kundli.phone}\nLocation: ${kundli.location}`;
         window.location.href = `mailto:?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
         break;
       case 'download':
@@ -45,7 +90,7 @@ const KundliManager = () => {
     }
   };
 
-  return (
+return (
     <div className="space-y-6 animate-fade-in">
       <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/10">
         <CardHeader>
@@ -59,9 +104,10 @@ const KundliManager = () => {
             <TableHeader>
               <TableRow className="border-cosmic-light/10 hover:bg-cosmic-dark/20">
                 <TableHead className="text-cosmic-light/80">Name</TableHead>
-                <TableHead className="text-cosmic-light/80">Birth Date</TableHead>
-                <TableHead className="text-cosmic-light/80">Birth Time</TableHead>
-                <TableHead className="text-cosmic-light/80">Birth Place</TableHead>
+                <TableHead className="text-cosmic-light/80">Email</TableHead>
+                <TableHead className="text-cosmic-light/80">Phone</TableHead>
+                <TableHead className="text-cosmic-light/80">Location</TableHead>
+                <TableHead className="text-cosmic-light/80">Payment</TableHead>
                 <TableHead className="text-cosmic-light/80">Status</TableHead>
                 <TableHead className="text-cosmic-light/80">Date</TableHead>
                 <TableHead className="text-cosmic-light/80">Actions</TableHead>
@@ -71,9 +117,18 @@ const KundliManager = () => {
               {sampleKundlis.map((kundli) => (
                 <TableRow key={kundli.id} className="border-cosmic-light/10 hover:bg-cosmic-dark/20">
                   <TableCell className="font-medium text-cosmic-light">{kundli.name}</TableCell>
-                  <TableCell className="text-cosmic-light">{kundli.birthDate}</TableCell>
-                  <TableCell className="text-cosmic-light">{kundli.birthTime}</TableCell>
-                  <TableCell className="text-cosmic-light">{kundli.birthPlace}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.email}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.phone}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.location}</TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded-full text-xs ${
+                      kundli.paymentStatus === "paid" ? "bg-green-500/20 text-green-300" : 
+                      kundli.paymentStatus === "pending" ? "bg-amber-500/20 text-amber-300" :
+                      "bg-red-500/20 text-red-300"
+                    }`}>
+                      {kundli.paymentStatus.charAt(0).toUpperCase() + kundli.paymentStatus.slice(1)}
+                    </span>
+                  </TableCell>
                   <TableCell>
                     <span className={`px-2 py-1 rounded-full text-xs ${
                       kundli.status === "completed" ? "bg-green-500/20 text-green-300" : 
@@ -144,16 +199,20 @@ const KundliManager = () => {
                   <p className="text-cosmic-light">{viewKundli.name}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-cosmic-light/70">Birth Date</h3>
-                  <p className="text-cosmic-light">{viewKundli.birthDate}</p>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">Email</h3>
+                  <p className="text-cosmic-light">{viewKundli.email}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-cosmic-light/70">Birth Time</h3>
-                  <p className="text-cosmic-light">{viewKundli.birthTime}</p>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">Phone</h3>
+                  <p className="text-cosmic-light">{viewKundli.phone}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-cosmic-light/70">Birth Place</h3>
-                  <p className="text-cosmic-light">{viewKundli.birthPlace}</p>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">Location</h3>
+                  <p className="text-cosmic-light">{viewKundli.location}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">Payment Status</h3>
+                  <p className="text-cosmic-light">{viewKundli.paymentStatus}</p>
                 </div>
               </div>
               
