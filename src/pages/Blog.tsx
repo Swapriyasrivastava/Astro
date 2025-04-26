@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Eye } from 'lucide-react';
+import { Eye, Edit, Trash2, Plus } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
-// Sample blog data
 const sampleBlogs = [
   {
     id: 1,
@@ -40,17 +39,156 @@ const sampleBlogs = [
     publishDate: "2025-03-15",
     author: "Selene Moonbeam",
     category: "Lunar Practices",
-    content: "The new moon represents beginnings, potential, and the planting of seeds. This monthly cosmic reset is the perfect time to set intentions and connect with your inner wisdom. Creating a personal new moon ritual can help you harness this powerful energy and bring more intentionality to your life's journey.\n\nBegin by preparing a sacred space – this could be as simple as clearing a table, lighting a candle, or arranging meaningful objects that represent your goals. Many practitioners find that cleansing their space with sage, palo santo, or incense helps shift the energy.\n\nSpend time in reflection, perhaps journaling about what you wish to release from the previous cycle and what you hope to call in. Writing down specific intentions or creating a vision board can be powerful practices. Consider the astrological sign the new moon falls in, as this adds specific qualities to the energy available.\n\nSome practitioners enjoy incorporating elements like crystals (clear quartz for amplification, moonstone for new beginnings), oracle or tarot cards for guidance, or meditation to connect with their intuition. Remember, the most potent rituals are those that feel authentic and meaningful to you personally."
+    content: "The new moon represents beginnings, potential, and the planting of seeds. This monthly cosmic reset is the perfect time to set intentions and connect with your inner wisdom. Creating a personal new moon ritual can help you harness this powerful energy and bring more intentionality to your life's journey.\n\nBegin by preparing a sacred space – this could be as simple as clearing a table, lighting a candle, or arranging meaningful objects that represent your goals. Many practitioners find that cleansing your space with sage, palo santo, or incense helps shift the energy.\n\nSpend time in reflection, perhaps journaling about what you wish to release from the previous cycle and what you hope to call in. Writing down specific intentions or creating a vision board can be powerful practices. Consider the astrological sign the new moon falls in, as this adds specific qualities to the energy available.\n\nSome practitioners enjoy incorporating elements like crystals (clear quartz for amplification, moonstone for new beginnings), oracle or tarot cards for guidance, or meditation to connect with their intuition. Remember, the most potent rituals are those that feel authentic and meaningful to you personally."
   }
 ];
 
 const BlogPage = () => {
+  const { toast } = useToast();
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [blogs, setBlogs] = useState(sampleBlogs);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({
+    title: '',
+    excerpt: '',
+    content: '',
+    category: '',
+    author: ''
+  });
+
+  const handleDelete = (blogId) => {
+    setBlogs(blogs.filter(blog => blog.id !== blogId));
+    toast({
+      title: "Blog Deleted",
+      description: "The blog post has been successfully deleted."
+    });
+  };
+
+  const handleEdit = (blog) => {
+    setSelectedBlog(blog);
+    setEditForm({
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      category: blog.category,
+      author: blog.author
+    });
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    if (selectedBlog) {
+      setBlogs(blogs.map(blog => 
+        blog.id === selectedBlog.id 
+          ? { ...blog, ...editForm, publishDate: new Date().toISOString().slice(0, 10) }
+          : blog
+      ));
+    } else {
+      const newBlog = {
+        id: blogs.length + 1,
+        ...editForm,
+        publishDate: new Date().toISOString().slice(0, 10)
+      };
+      setBlogs([...blogs, newBlog]);
+    }
+
+    setIsEditing(false);
+    setSelectedBlog(null);
+    setEditForm({
+      title: '',
+      excerpt: '',
+      content: '',
+      category: '',
+      author: ''
+    });
+
+    toast({
+      title: selectedBlog ? "Blog Updated" : "Blog Created",
+      description: selectedBlog 
+        ? "The blog post has been successfully updated."
+        : "A new blog post has been created."
+    });
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {selectedBlog ? (
-        <Card className="cosmic-glass bg-cosmic-dark/40 border-cosmic-light/10">
+      {isEditing ? (
+        <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-cosmic-light">
+              {selectedBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-cosmic-light mb-2">Title</label>
+                <input
+                  type="text"
+                  value={editForm.title}
+                  onChange={(e) => setEditForm({...editForm, title: e.target.value})}
+                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                />
+              </div>
+              <div>
+                <label className="block text-cosmic-light mb-2">Category</label>
+                <input
+                  type="text"
+                  value={editForm.category}
+                  onChange={(e) => setEditForm({...editForm, category: e.target.value})}
+                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                />
+              </div>
+              <div>
+                <label className="block text-cosmic-light mb-2">Excerpt</label>
+                <textarea
+                  value={editForm.excerpt}
+                  onChange={(e) => setEditForm({...editForm, excerpt: e.target.value})}
+                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  rows={3}
+                />
+              </div>
+              <div>
+                <label className="block text-cosmic-light mb-2">Content</label>
+                <textarea
+                  value={editForm.content}
+                  onChange={(e) => setEditForm({...editForm, content: e.target.value})}
+                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  rows={10}
+                />
+              </div>
+              <div>
+                <label className="block text-cosmic-light mb-2">Author</label>
+                <input
+                  type="text"
+                  value={editForm.author}
+                  onChange={(e) => setEditForm({...editForm, author: e.target.value})}
+                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                />
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-end space-x-2">
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setIsEditing(false);
+                setSelectedBlog(null);
+              }}
+              className="border-cosmic-light/10 text-cosmic-light hover:bg-cosmic-accent/20"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSave}
+              className="bg-cosmic-accent/80 text-cosmic-light hover:bg-cosmic-accent"
+            >
+              {selectedBlog ? 'Update' : 'Create'}
+            </Button>
+          </CardFooter>
+        </Card>
+      ) : selectedBlog ? (
+        <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
@@ -73,10 +211,17 @@ const BlogPage = () => {
         <>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-cosmic-light">Cosmic Blog</h2>
+            <Button 
+              onClick={() => setIsEditing(true)}
+              className="bg-cosmic-accent/80 text-cosmic-light hover:bg-cosmic-accent"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              New Blog Post
+            </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {sampleBlogs.map((blog) => (
-              <Card key={blog.id} className="cosmic-glass bg-cosmic-dark/40 border-cosmic-light/10 hover:bg-cosmic-dark/50 transition-colors">
+            {blogs.map((blog) => (
+              <Card key={blog.id} className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5 hover:bg-cosmic-dark/30 transition-colors">
                 <CardHeader>
                   <div className="text-cosmic-accent text-sm">{blog.category}</div>
                   <CardTitle className="text-xl font-bold text-cosmic-light">{blog.title}</CardTitle>
@@ -86,15 +231,35 @@ const BlogPage = () => {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <div className="text-cosmic-light/60 text-sm">By {blog.author} • {blog.publishDate}</div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="text-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-accent/20"
-                    onClick={() => setSelectedBlog(blog)}
-                  >
-                    <Eye className="h-4 w-4 mr-1" />
-                    Read More
-                  </Button>
+                  <div className="flex space-x-2">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-accent/20"
+                      onClick={() => setSelectedBlog(blog)}
+                    >
+                      <Eye className="h-4 w-4 mr-1" />
+                      View
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-accent/20"
+                      onClick={() => handleEdit(blog)}
+                    >
+                      <Edit className="h-4 w-4 mr-1" />
+                      Edit
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-destructive hover:text-destructive/80 hover:bg-destructive/20"
+                      onClick={() => handleDelete(blog.id)}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
                 </CardFooter>
               </Card>
             ))}
