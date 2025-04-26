@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -91,6 +90,14 @@ const KundliManager = () => {
                         size="sm" 
                         variant="ghost" 
                         className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
+                        onClick={() => handleViewKundli(kundli)}
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
                         onClick={() => handleShare('whatsapp', kundli)}
                       >
                         <MessageSquare className="h-4 w-4" />
@@ -110,14 +117,6 @@ const KundliManager = () => {
                         onClick={() => handleShare('download', kundli)}
                       >
                         <Download className="h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="h-8 w-8 p-0 text-cosmic-light hover:text-cosmic-accent"
-                        onClick={() => handleViewKundli(kundli)}
-                      >
-                        <Eye className="h-4 w-4" />
                       </Button>
                     </div>
                   </TableCell>
