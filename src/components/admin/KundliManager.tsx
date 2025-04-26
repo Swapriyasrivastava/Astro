@@ -6,14 +6,14 @@ import { Eye, MessageSquare, Mail, Download, Star } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 
-// Sample data with updated fields
 const sampleKundlis = [
   { 
     id: 1, 
     name: "Raj Sharma", 
     email: "raj.sharma@example.com",
     phone: "+91 98765 43210",
-    location: "Mumbai, Maharashtra",
+    city: "Mumbai",
+    state: "Maharashtra",
     paymentStatus: "paid",
     status: "completed", 
     date: "2025-04-01" 
@@ -23,7 +23,8 @@ const sampleKundlis = [
     name: "Priya Patel",
     email: "priya.patel@example.com",
     phone: "+91 87654 32109",
-    location: "Delhi, NCR",
+    city: "Delhi",
+    state: "Delhi",
     paymentStatus: "pending",
     status: "completed", 
     date: "2025-03-28" 
@@ -33,7 +34,8 @@ const sampleKundlis = [
     name: "Amit Kumar",
     email: "amit.kumar@example.com",
     phone: "+91 76543 21098",
-    location: "Bangalore, Karnataka",
+    city: "Bangalore",
+    state: "Karnataka",
     paymentStatus: "paid",
     status: "pending", 
     date: "2025-04-05" 
@@ -43,7 +45,8 @@ const sampleKundlis = [
     name: "Maya Singh",
     email: "maya.singh@example.com",
     phone: "+91 65432 10987",
-    location: "Kolkata, West Bengal",
+    city: "Kolkata",
+    state: "West Bengal",
     paymentStatus: "failed",
     status: "in-progress", 
     date: "2025-04-07" 
@@ -53,7 +56,8 @@ const sampleKundlis = [
     name: "Vikram Joshi",
     email: "vikram.joshi@example.com",
     phone: "+91 54321 09876",
-    location: "Chennai, Tamil Nadu",
+    city: "Chennai",
+    state: "Tamil Nadu",
     paymentStatus: "paid",
     status: "completed", 
     date: "2025-03-20" 
@@ -90,7 +94,7 @@ const KundliManager = () => {
     }
   };
 
-return (
+  return (
     <div className="space-y-6 animate-fade-in">
       <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/10">
         <CardHeader>
@@ -106,7 +110,8 @@ return (
                 <TableHead className="text-cosmic-light/80">Name</TableHead>
                 <TableHead className="text-cosmic-light/80">Email</TableHead>
                 <TableHead className="text-cosmic-light/80">Phone</TableHead>
-                <TableHead className="text-cosmic-light/80">Location</TableHead>
+                <TableHead className="text-cosmic-light/80">City</TableHead>
+                <TableHead className="text-cosmic-light/80">State</TableHead>
                 <TableHead className="text-cosmic-light/80">Payment</TableHead>
                 <TableHead className="text-cosmic-light/80">Status</TableHead>
                 <TableHead className="text-cosmic-light/80">Date</TableHead>
@@ -119,7 +124,8 @@ return (
                   <TableCell className="font-medium text-cosmic-light">{kundli.name}</TableCell>
                   <TableCell className="text-cosmic-light">{kundli.email}</TableCell>
                   <TableCell className="text-cosmic-light">{kundli.phone}</TableCell>
-                  <TableCell className="text-cosmic-light">{kundli.location}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.city}</TableCell>
+                  <TableCell className="text-cosmic-light">{kundli.state}</TableCell>
                   <TableCell>
                     <span className={`px-2 py-1 rounded-full text-xs ${
                       kundli.paymentStatus === "paid" ? "bg-green-500/20 text-green-300" : 
@@ -207,8 +213,12 @@ return (
                   <p className="text-cosmic-light">{viewKundli.phone}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-cosmic-light/70">Location</h3>
-                  <p className="text-cosmic-light">{viewKundli.location}</p>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">City</h3>
+                  <p className="text-cosmic-light">{viewKundli.city}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-cosmic-light/70">State</h3>
+                  <p className="text-cosmic-light">{viewKundli.state}</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-cosmic-light/70">Payment Status</h3>
