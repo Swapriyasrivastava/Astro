@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -13,61 +12,28 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
       screens: {
-        '2xl': '1400px'
-      }
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {
-        border: 'hsl(0 0% 20%)', // Lighter border
-        input: 'hsl(0 0% 20%)', // Lighter input
-        ring: 'hsl(240 3.7% 25%)', // Lighter ring
-        background: 'hsl(240 10% 10%)', // Lighter background
-        foreground: 'hsl(0 0% 98%)', // Light text
-        primary: {
-          DEFAULT: 'hsl(240 5.9% 90%)', // Light primary
-          foreground: 'hsl(240 10% 3.9%)' // Dark primary text
-        },
-        secondary: {
-          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter secondary
-          foreground: 'hsl(0 0% 98%)' // Light secondary text
-        },
-        destructive: {
-          DEFAULT: 'hsl(0 62.8% 40.6%)', // Lighter red for destructive actions
-          foreground: 'hsl(0 0% 98%)'
-        },
-        muted: {
-          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter muted
-          foreground: 'hsl(240 5% 70%)' // Lighter muted text
-        },
-        accent: {
-          DEFAULT: 'hsl(240 3.7% 25%)', // Lighter accent
-          foreground: 'hsl(0 0% 98%)' // Light accent text
-        },
-        popover: {
-          DEFAULT: 'hsl(240 10% 10%)', // Lighter popover
-          foreground: 'hsl(0 0% 98%)' // Light popover text
-        },
-        card: {
-          DEFAULT: 'hsl(240 10% 10%)', // Lighter card
-          foreground: 'hsl(0 0% 98%)' // Light card text
+        background: "#F1F0FB", // Soft Gray
+        foreground: "#333333", // Dark Gray for text
+        cosmic: {
+          DEFAULT: "#6A5ACD", // Soft Indigo
+          dark: "#F1F1F1", // Light Gray
+          light: "#9179BD", // Soft Purple
+          accent: "#33C3F0", // Sky Blue
         },
         sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))'
-        },
-        cosmic: {
-          DEFAULT: '#9179BD', // Lighter cosmic
-          dark: '#2A2F3C', // Lighter cosmic dark
-          light: '#E2D6FF', // Lighter cosmic light
-          accent: '#aa97ff', // Lighter cosmic accent
+          DEFAULT: "#FFFFFF", // Pure White
+          foreground: "#333333", // Dark Gray
+          primary: "#6A5ACD", // Soft Indigo
+          'primary-foreground': "#FFFFFF", // White
+          accent: "#33C3F0", // Sky Blue
+          border: "#E0E0E0", // Light Gray Border
         }
       },
       borderRadius: {
