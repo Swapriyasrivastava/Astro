@@ -19,21 +19,21 @@ export default {
     },
     extend: {
       colors: {
-        background: "#F1F0FB", // Soft Gray
-        foreground: "#333333", // Dark Gray for text
+        background: "#F8F9FD", // Lighter, crisper background
+        foreground: "#2D3748", // Softer dark text
         cosmic: {
-          DEFAULT: "#6A5ACD", // Soft Indigo
-          dark: "#F1F1F1", // Light Gray
-          light: "#9179BD", // Soft Purple
-          accent: "#33C3F0", // Sky Blue
+          DEFAULT: "#4F46E5", // Vibrant indigo
+          dark: "#F8FAFC", // Very light gray
+          light: "#818CF8", // Soft purple
+          accent: "#38BDF8", // Bright sky blue
         },
         sidebar: {
-          DEFAULT: "#FFFFFF", // Pure White
-          foreground: "#333333", // Dark Gray
-          primary: "#6A5ACD", // Soft Indigo
+          DEFAULT: "#FFFFFF", // Pure white
+          foreground: "#2D3748", // Soft dark
+          primary: "#4F46E5", // Vibrant indigo
           'primary-foreground': "#FFFFFF", // White
-          accent: "#33C3F0", // Sky Blue
-          border: "#E0E0E0", // Light Gray Border
+          accent: "#38BDF8", // Sky blue
+          border: "#E2E8F0", // Light gray border
         }
       },
       borderRadius: {
@@ -69,6 +69,14 @@ export default {
         'float': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        'card-hover': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-5px)' },
+        },
+        'glow': {
+          '0%, 100%': { boxShadow: '0 0 15px rgba(79, 70, 229, 0.2)' },
+          '50%': { boxShadow: '0 0 25px rgba(79, 70, 229, 0.4)' },
         }
       },
       animation: {
@@ -79,10 +87,12 @@ export default {
         'scale-in': 'scale-in 0.2s ease-out',
         'pulse-star': 'pulse-star 2s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
+        'card-float': 'card-hover 3s ease-in-out infinite',
+        'soft-glow': 'glow 3s ease-in-out infinite',
       },
       backgroundImage: {
-        'cosmic-gradient': 'linear-gradient(to right bottom, #2A2F3C, #43375F)', // Lighter gradient
-        'star-field': 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', // Brighter stars
+        'cosmic-gradient': 'linear-gradient(135deg, #F8F9FD 0%, #EEF2FF 100%)',
+        'card-gradient': 'linear-gradient(to right bottom, #FFFFFF, #F8FAFC)',
       }
     }
   },
