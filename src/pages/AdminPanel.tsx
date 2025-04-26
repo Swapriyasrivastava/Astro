@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -123,16 +122,6 @@ const AdminPanel = () => {
                     >
                       <Package className="h-4 w-4" />
                       <span>Orders</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      isActive={currentView === 'content'} 
-                      tooltip="Content"
-                      onClick={() => handleMenuClick('content')}
-                    >
-                      <FileText className="h-4 w-4" />
-                      <span>Content</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
@@ -279,7 +268,6 @@ const AdminPanel = () => {
         </Sidebar>
 
         <SidebarInset>
-          {/* Navbar */}
           <nav className="cosmic-glass bg-cosmic-dark/60 border-b border-cosmic-light/20 sticky top-0 z-50">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
@@ -368,7 +356,6 @@ const AdminPanel = () => {
             </div>
           </nav>
 
-          {/* Main Content */}
           <div className="container mx-auto px-4 py-6">
             {renderView()}
           </div>
