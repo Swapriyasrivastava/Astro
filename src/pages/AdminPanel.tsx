@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -71,15 +72,17 @@ const AdminPanel = () => {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-background">
+      <div className="flex min-h-screen w-full bg-cosmic-dark">
         {/* Sidebar */}
-        <Sidebar>
+        <Sidebar className="border-cosmic-light/20">
           <SidebarHeader>
             <div className="flex items-center px-2">
-              <div className="flex items-center justify-center rounded-full overflow-hidden bg-cosmic-accent/20 w-10 h-10">
-                <span className="text-xl font-bold animate-float">✨</span>
-              </div>
-              <span className="ml-2 text-lg font-bold text-sidebar-foreground">Astral Admin</span>
+              <img 
+                src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+                alt="astroJanak Logo" 
+                className="h-10 w-10 object-contain" 
+              />
+              <span className="ml-2 text-lg font-bold text-cosmic-light">astroJanak</span>
             </div>
           </SidebarHeader>
           
@@ -93,6 +96,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'dashboard'} 
                       tooltip="Dashboard"
                       onClick={() => handleMenuClick('dashboard')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <LayoutDashboard className="h-4 w-4" />
                       <span>Dashboard</span>
@@ -103,6 +107,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'orders'} 
                       tooltip="Orders"
                       onClick={() => handleMenuClick('orders')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Package className="h-4 w-4" />
                       <span>Orders</span>
@@ -113,6 +118,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'horoscopes'} 
                       tooltip="Horoscopes"
                       onClick={() => handleMenuClick('horoscopes')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Star className="h-4 w-4" />
                       <span>Horoscopes</span>
@@ -131,6 +137,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'about'} 
                       tooltip="About"
                       onClick={() => handleMenuClick('about')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Book className="h-4 w-4" />
                       <span>About</span>
@@ -141,6 +148,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'blog'} 
                       tooltip="Blog"
                       onClick={() => handleMenuClick('blog')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <FileText className="h-4 w-4" />
                       <span>Blog</span>
@@ -151,6 +159,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'contact'} 
                       tooltip="Contact"
                       onClick={() => handleMenuClick('contact')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Contact className="h-4 w-4" />
                       <span>Contact</span>
@@ -169,6 +178,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'kundli'} 
                       tooltip="Kundli Manager"
                       onClick={() => handleMenuClick('kundli')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Star className="h-4 w-4" />
                       <span>Kundli Manager</span>
@@ -187,6 +197,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'settings'}
                       tooltip="Settings"
                       onClick={() => handleMenuClick('settings')}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Settings className="h-4 w-4" />
                       <span>Settings</span>
@@ -199,6 +210,7 @@ const AdminPanel = () => {
                         title: "Email System",
                         description: "Communication tools coming soon."
                       })}
+                      className="hover:bg-cosmic-light/20 transition-all duration-300"
                     >
                       <Mail className="h-4 w-4" />
                       <span>Email</span>
@@ -214,7 +226,7 @@ const AdminPanel = () => {
               <Button
                 onClick={logout}
                 variant="outline"
-                className="w-full justify-start text-sidebar-foreground hover:bg-cosmic-accent/20"
+                className="w-full justify-start text-cosmic-light hover:bg-cosmic-light/20 hover:text-cosmic-light/90 btn-hover-effect"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
@@ -224,7 +236,7 @@ const AdminPanel = () => {
         </Sidebar>
 
         <SidebarInset>
-          <nav className="cosmic-glass bg-cosmic-dark/60 border-b border-cosmic-light/20 sticky top-0 z-50">
+          <nav className="cosmic-glass border-b border-cosmic-light/20 sticky top-0 z-50">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
@@ -245,7 +257,7 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="relative animate-fade-in hover:bg-cosmic-accent/20"
+                    className="relative animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect"
                     onClick={() => toast({ 
                       title: "Notifications", 
                       description: "You have 3 unread notifications" 
@@ -260,7 +272,7 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="animate-fade-in hover:bg-cosmic-accent/20"
+                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect"
                     onClick={() => toast({ 
                       title: "Messages", 
                       description: "No new messages" 
@@ -272,7 +284,7 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="animate-fade-in hover:bg-cosmic-accent/20"
+                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect"
                     onClick={() => toast({ 
                       title: "Theme Settings", 
                       description: "Toggle between light and dark mode" 
@@ -283,7 +295,7 @@ const AdminPanel = () => {
                   
                   <div className="relative group">
                     <Avatar className="h-8 w-8 transition-transform hover:scale-110">
-                      <AvatarFallback className="bg-cosmic-accent/20 text-cosmic-light">
+                      <AvatarFallback className="bg-cosmic-light/20 text-cosmic-light">
                         <User className="h-4 w-4" />
                       </AvatarFallback>
                     </Avatar>
@@ -294,13 +306,13 @@ const AdminPanel = () => {
                         <div className="border-t border-cosmic-light/20"></div>
                         <button
                           onClick={() => handleMenuClick('settings')}
-                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-accent/20 transition-colors"
+                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-light/20 transition-colors"
                         >
                           Settings
                         </button>
                         <button
                           onClick={logout}
-                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-accent/20 transition-colors"
+                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-light/20 transition-colors"
                         >
                           Sign out
                         </button>

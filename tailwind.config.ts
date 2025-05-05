@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,17 +23,17 @@ export default {
         background: "#F8F9FD", // Lighter, crisper background
         foreground: "#2D3748", // Softer dark text
         cosmic: {
-          DEFAULT: "#4F46E5", // Vibrant indigo
-          dark: "#F8FAFC", // Very light gray
-          light: "#818CF8", // Soft purple
-          accent: "#38BDF8", // Bright sky blue
+          DEFAULT: "#8B5A2B", // Brown from logo
+          dark: "#000000", // Black from logo background
+          light: "#FF5722", // Orange from logo
+          accent: "#FF7043", // Lighter orange for accents
         },
         sidebar: {
           DEFAULT: "#FFFFFF", // Pure white
-          foreground: "#2D3748", // Soft dark
-          primary: "#4F46E5", // Vibrant indigo
+          foreground: "#8B5A2B", // Brown from logo
+          primary: "#8B5A2B", // Brown from logo
           'primary-foreground': "#FFFFFF", // White
-          accent: "#38BDF8", // Sky blue
+          accent: "#FF5722", // Orange from logo
           border: "#E2E8F0", // Light gray border
         }
       },
@@ -75,8 +76,12 @@ export default {
           '50%': { transform: 'translateY(-5px)' },
         },
         'glow': {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(79, 70, 229, 0.2)' },
-          '50%': { boxShadow: '0 0 25px rgba(79, 70, 229, 0.4)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(255, 87, 34, 0.3)' },
+          '50%': { boxShadow: '0 0 25px rgba(255, 87, 34, 0.5)' },
+        },
+        'button-pulse': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
         }
       },
       animation: {
@@ -89,9 +94,10 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'card-float': 'card-hover 3s ease-in-out infinite',
         'soft-glow': 'glow 3s ease-in-out infinite',
+        'button-pulse': 'button-pulse 2s ease-in-out infinite',
       },
       backgroundImage: {
-        'cosmic-gradient': 'linear-gradient(135deg, #F8F9FD 0%, #EEF2FF 100%)',
+        'cosmic-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #000000 100%)',
         'card-gradient': 'linear-gradient(to right bottom, #FFFFFF, #F8FAFC)',
       }
     }

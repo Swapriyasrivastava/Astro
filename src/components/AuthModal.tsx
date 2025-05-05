@@ -59,8 +59,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
     setIsSubmitting(true);
     
     try {
-      // Modified to pass the new password and security answer
+      // Fixed: Pass the email, new password and security answer to resetPassword function
       await resetPassword(email, newPassword, securityAnswer);
+      // Reset fields after successful password reset
+      setNewPassword("");
+      setConfirmPassword("");
+      setSecurityAnswer("");
+      // Switch back to login tab
       setActiveTab("login");
     } catch (error) {
       // Error handled in context
@@ -78,16 +83,18 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
           <DialogTitle className="flex flex-col items-center gap-2">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse-star">
-                <Sparkles className="w-8 h-8 text-cosmic-accent absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <Sparkles className="w-8 h-8 text-cosmic-light absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="animate-float">
-                <div className="h-16 w-16 rounded-full bg-cosmic-accent/20 flex items-center justify-center">
-                  <span className="text-3xl">✨</span>
-                </div>
+                <img 
+                  src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+                  alt="astroJanak Logo" 
+                  className="h-16 object-contain"
+                />
               </div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-cosmic-light via-cosmic-accent to-cosmic-light bg-clip-text text-transparent">
-              Cosmic Access Portal
+              astroJanak Access Portal
             </span>
           </DialogTitle>
         </DialogHeader>
@@ -96,13 +103,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
           <TabsList className="grid grid-cols-2 w-full bg-cosmic-dark/50">
             <TabsTrigger 
               value="login" 
-              className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light transition-all duration-300"
+              className="data-[state=active]:bg-cosmic-light/20 data-[state=active]:text-cosmic-light transition-all duration-300"
             >
               Login
             </TabsTrigger>
             <TabsTrigger 
               value="reset" 
-              className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light transition-all duration-300"
+              className="data-[state=active]:bg-cosmic-light/20 data-[state=active]:text-cosmic-light transition-all duration-300"
             >
               Reset Password
             </TabsTrigger>
@@ -119,8 +126,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="cosmic.traveler@astral.com"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    placeholder="cosmic.traveler@astrojanak.com"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -145,7 +152,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -153,7 +160,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
               
               <Button 
                 type="submit" 
-                className="w-full bg-cosmic-accent hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300"
+                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300 btn-hover-effect"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -162,7 +169,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     Connecting...
                   </span>
                 ) : (
-                  'Enter the Cosmos'
+                  'Enter the Portal'
                 )}
               </Button>
             </form>
@@ -179,8 +186,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="cosmic.traveler@astral.com"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    placeholder="cosmic.traveler@astrojanak.com"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -194,7 +201,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     id="security-q"
                     value={securityAnswer}
                     onChange={(e) => setSecurityAnswer(e.target.value)}
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -210,7 +217,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -226,7 +233,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40"
+                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
                     required
                   />
                 </div>
@@ -237,7 +244,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
               
               <Button 
                 type="submit" 
-                className="w-full bg-cosmic-accent hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300"
+                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300 btn-hover-effect"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

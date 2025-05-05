@@ -23,13 +23,15 @@ const Index = () => {
       
       <div className="container mx-auto px-4 text-center max-w-3xl z-10">
         <div className="animate-float mb-4">
-          <div className="h-24 w-24 rounded-full bg-cosmic-accent/20 flex items-center justify-center mx-auto">
-            <span className="text-4xl">✨</span>
-          </div>
+          <img 
+            src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+            alt="astroJanak Logo" 
+            className="h-32 mx-auto object-contain"
+          />
         </div>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cosmic-light text-glow mb-4 animate-fade-in">
-          Astral Admin Portal
+          astroJanak Portal
         </h1>
         
         <p className="text-lg md:text-xl text-cosmic-light/80 mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
@@ -38,7 +40,7 @@ const Index = () => {
         
         <Button
           onClick={() => setIsAuthModalOpen(true)}
-          className="bg-cosmic-accent hover:bg-cosmic text-cosmic-dark font-semibold px-8 py-4 text-lg animate-fade-in mt-4"
+          className="bg-cosmic-light hover:bg-cosmic text-cosmic-dark font-semibold px-8 py-4 text-lg animate-fade-in mt-4 btn-hover-effect"
           style={{ animationDelay: "0.3s" }}
         >
           Access Portal

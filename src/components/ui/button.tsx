@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -5,16 +6,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-cosmic-light text-white hover:bg-cosmic-light/90 shadow-md hover:shadow-lg", 
-        destructive: "bg-red-500 text-white hover:bg-red-600 shadow-md hover:shadow-lg",
-        secondary: "bg-cosmic-accent text-white hover:bg-cosmic-accent/90 shadow-md hover:shadow-lg",
-        outline: "border border-cosmic-light text-cosmic-light hover:bg-cosmic-light/10 shadow-sm",
-        ghost: "hover:bg-cosmic-light/20 hover:text-cosmic-light",
-        link: "text-cosmic underline-offset-4 hover:underline",
+        default: "bg-cosmic-light text-white hover:bg-cosmic-light/90 shadow-md hover:shadow-lg hover:scale-105",
+        destructive: "bg-red-500 text-white hover:bg-red-600 shadow-md hover:shadow-lg hover:scale-105",
+        secondary: "bg-cosmic-accent text-white hover:bg-cosmic-accent/90 shadow-md hover:shadow-lg hover:scale-105",
+        outline: "border border-cosmic hover:border-cosmic-light text-cosmic hover:text-cosmic-light hover:bg-cosmic-dark/10 shadow-sm hover:shadow-md hover:scale-105",
+        ghost: "hover:bg-cosmic-light/20 hover:text-cosmic-light hover:scale-105",
+        link: "text-cosmic underline-offset-4 hover:underline hover:text-cosmic-light",
       },
       size: {
         default: "h-10 px-4 py-2",

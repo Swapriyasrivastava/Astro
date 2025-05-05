@@ -49,10 +49,12 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <a href="/" className="flex items-center">
-                <div className="flex items-center justify-center rounded-full overflow-hidden bg-cosmic-accent/20 w-10 h-10">
-                  <span className="text-xl font-bold animate-float">✨</span>
-                </div>
-                <span className="ml-2 text-xl font-bold text-cosmic-light text-glow">Astral Access</span>
+                <img 
+                  src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+                  alt="astroJanak Logo" 
+                  className="h-10 w-10 object-contain" 
+                />
+                <span className="ml-2 text-xl font-bold text-cosmic-light text-glow">astroJanak</span>
               </a>
             </div>
 
@@ -62,7 +64,7 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-3 py-2 text-cosmic-light/80 hover:text-cosmic-light rounded-md transition-colors hover:bg-cosmic-accent/10"
+                  className="px-3 py-2 text-cosmic-light/80 hover:text-cosmic-light rounded-md transition-colors hover:bg-cosmic-light/10 nav-link"
                 >
                   {link.name}
                 </a>
@@ -74,19 +76,19 @@ const Navbar: React.FC = () => {
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative cosmic-border bg-cosmic-dark/40 hover:bg-cosmic-accent/20">
-                      <span className="mr-2">{user.username}</span>
-                      <UserRound className="h-4 w-4" />
+                    <Button variant="ghost" className="relative cosmic-border bg-cosmic-dark/40 hover:bg-cosmic-light/20 btn-hover-effect">
+                      <span className="mr-2 text-cosmic-light">{user.username}</span>
+                      <UserRound className="h-4 w-4 text-cosmic-light" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="cosmic-glass w-56">
-                    <DropdownMenuLabel>My Cosmic Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>My Readings</DropdownMenuItem>
-                    {user.isAdmin && <DropdownMenuItem>Admin Panel</DropdownMenuItem>}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout} className="text-destructive focus:text-destructive">
+                  <DropdownMenuContent className="cosmic-glass w-56 border-cosmic-light/20">
+                    <DropdownMenuLabel className="text-cosmic-light">My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator className="bg-cosmic-light/20" />
+                    <DropdownMenuItem className="text-cosmic-light hover:bg-cosmic-light/20 cursor-pointer">Profile</DropdownMenuItem>
+                    <DropdownMenuItem className="text-cosmic-light hover:bg-cosmic-light/20 cursor-pointer">My Readings</DropdownMenuItem>
+                    {user.isAdmin && <DropdownMenuItem className="text-cosmic-light hover:bg-cosmic-light/20 cursor-pointer">Admin Panel</DropdownMenuItem>}
+                    <DropdownMenuSeparator className="bg-cosmic-light/20" />
+                    <DropdownMenuItem onClick={logout} className="text-destructive hover:bg-destructive/20 focus:text-destructive cursor-pointer">
                       <LogOut className="mr-2 h-4 w-4" />
                       <span>Log Out</span>
                     </DropdownMenuItem>
@@ -95,7 +97,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <Button
                   onClick={() => setIsAuthModalOpen(true)}
-                  className="bg-cosmic-accent hover:bg-cosmic text-cosmic-dark"
+                  className="bg-cosmic-light hover:bg-cosmic text-cosmic-dark btn-hover-effect"
                 >
                   Enter Portal
                 </Button>
@@ -104,7 +106,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <Button variant="ghost" onClick={toggleMenu} size="icon">
+              <Button variant="ghost" onClick={toggleMenu} size="icon" className="text-cosmic-light hover:bg-cosmic-light/20 btn-hover-effect">
                 {isMenuOpen ? (
                   <X className="h-6 w-6 text-cosmic-light" />
                 ) : (
@@ -124,7 +126,7 @@ const Navbar: React.FC = () => {
       >
         <div className="cosmic-glass h-full w-full flex flex-col">
           <div className="flex justify-end p-4">
-            <Button variant="ghost" onClick={toggleMenu} size="icon">
+            <Button variant="ghost" onClick={toggleMenu} size="icon" className="text-cosmic-light hover:bg-cosmic-light/20 btn-hover-effect">
               <X className="h-6 w-6 text-cosmic-light" />
             </Button>
           </div>
@@ -152,7 +154,7 @@ const Navbar: React.FC = () => {
                     toggleMenu();
                   }}
                   variant="outline"
-                  className="w-full border-cosmic-light/30 text-cosmic-light hover:bg-cosmic-accent/20"
+                  className="w-full border-cosmic-light/30 text-cosmic-light hover:bg-cosmic-light/20 btn-hover-effect"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log Out</span>
@@ -164,7 +166,7 @@ const Navbar: React.FC = () => {
                   setIsAuthModalOpen(true);
                   toggleMenu();
                 }}
-                className="w-3/4 bg-cosmic-accent hover:bg-cosmic text-cosmic-dark"
+                className="w-3/4 bg-cosmic-light hover:bg-cosmic text-cosmic-dark btn-hover-effect"
               >
                 Enter Portal
               </Button>

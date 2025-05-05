@@ -10,7 +10,7 @@
 
   body {
     @apply bg-background text-foreground selection:bg-cosmic-light/20 selection:text-foreground;
-    background: linear-gradient(135deg, #F8F9FD 0%, #EEF2FF 100%);
+    background: linear-gradient(135deg, #0A0A0A 0%, #000000 100%);
     min-height: 100vh;
   }
 
@@ -21,8 +21,8 @@
 
 /* Enhanced cosmic glass effect */
 .cosmic-glass {
-  @apply bg-white/80 backdrop-blur-xl border border-white shadow-lg hover:shadow-xl transition-shadow duration-300;
-  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1);
+  @apply bg-black/70 backdrop-blur-xl border border-cosmic-light/20 shadow-lg hover:shadow-xl transition-shadow duration-300;
+  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.2);
 }
 
 /* Card hover effect */
@@ -45,7 +45,7 @@
 
 /* Enhanced text glow */
 .text-glow {
-  text-shadow: 0 0 20px rgba(79, 70, 229, 0.2);
+  text-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
 }
 
 /* Card shine effect */
@@ -81,9 +81,34 @@
 /* Navigation link hover effect */
 .nav-link {
   @apply relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
-         after:bottom-0 after:left-0 after:bg-cosmic after:origin-bottom-right after:transition-transform;
+         after:bottom-0 after:left-0 after:bg-cosmic-light after:origin-bottom-right after:transition-transform;
 }
 
 .nav-link:hover::after {
   @apply scale-x-100 origin-bottom-left;
+}
+
+/* Button hover effect */
+.btn-hover-effect {
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+/* Pulse animation for buttons */
+.btn-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 87, 34, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
+  }
 }
