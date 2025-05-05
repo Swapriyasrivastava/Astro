@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -91,7 +92,7 @@ const KundliManager = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/10">
+      <Card className="cosmic-glass dashboard-content">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-cosmic-light">Kundli Manager</CardTitle>
           <CardDescription className="text-cosmic-light/80">

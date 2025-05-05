@@ -25,6 +25,16 @@
   box-shadow: 0 4px 20px rgba(255, 87, 34, 0.3);
 }
 
+/* Dashboard content background */
+.dashboard-content {
+  @apply bg-cosmic-dark/70 border border-cosmic-light/20 rounded-lg shadow-lg text-cosmic-light;
+}
+
+/* Text colors for select components */
+.select-content {
+  @apply bg-cosmic-dark/80 text-cosmic-light border-cosmic-light/20;
+}
+
 /* Card hover effect */
 .hover-card {
   @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
@@ -118,6 +128,11 @@ input, select, textarea {
   @apply bg-cosmic-dark/40 border-cosmic-light/30 text-cosmic-light placeholder:text-cosmic-light/50;
 }
 
+/* Fixed SelectContent text visibility */
+[data-radix-select-item] {
+  @apply text-cosmic-light;
+}
+
 /* Enhanced sidebar styles */
 .sidebar-item-active {
   @apply bg-cosmic-light/20 text-cosmic-light;
@@ -147,12 +162,7 @@ input, select, textarea {
   @apply bg-cosmic-dark/60 border-cosmic-light/30 text-cosmic-light;
 }
 
-/* Dashboard content background */
-.dashboard-content {
-  @apply bg-cosmic-dark/70 border border-cosmic-light/20 rounded-lg shadow-lg text-white;
-}
-
-/* Logo animation */
+/* Logo animation enhanced */
 .logo-pulse {
   animation: logo-pulse 3s ease-in-out infinite;
 }
@@ -189,7 +199,7 @@ input, select, textarea {
 
 /* About page specific styles */
 .about-content p {
-  @apply text-white;
+  @apply text-cosmic-light;
 }
 
 .about-content h3 {
@@ -254,4 +264,14 @@ input, select, textarea {
 @keyframes badgePulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
+}
+
+/* Fix radix tabs component text color */
+.radix-tabs-trigger {
+  @apply text-cosmic-light;
+}
+
+/* Enhancement for dropdown content visibility */
+[data-radix-popper-content-wrapper] {
+  @apply text-cosmic-light;
 }

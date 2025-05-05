@@ -1,438 +1,437 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Bell, Mail, Star, Trash2, Archive, Reply, Forward, MailPlus, Search, Filter } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Search, Star, Trash, Mail, Send, Archive, Flag, Clock, Tag, Edit } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from '@/hooks/use-toast';
 
-// Sample email data
-const emailData = [
-  { 
-    id: 'e1', 
-    from: 'Raj Kumar', 
-    email: 'raj@example.com', 
-    subject: 'Kundli Reading Request', 
-    preview: 'Hello, I would like to request a detailed Kundli reading for my upcoming...',
-    content: 'Hello,\n\nI would like to request a detailed Kundli reading for my upcoming marriage. My birth details are as follows:\n\nDate: April 15, 1990\nTime: 08:30 AM\nPlace: Delhi, India\n\nPlease let me know the process and fees.\n\nRegards,\nRaj Kumar',
-    date: '15 mins ago', 
+// Sample emails data
+const sampleEmails = [
+  {
+    id: 1,
+    sender: "Raj Sharma",
+    email: "raj.sharma@example.com",
+    subject: "Regarding My Astrological Reading",
+    message: "Dear Astral Insights,\n\nI recently had a reading with one of your astrologers and I'm extremely impressed with the accuracy of the predictions. I would like to schedule another session for next week if possible.\n\nBest regards,\nRaj Sharma",
+    date: "2025-05-05",
+    read: true,
+    starred: false,
+    label: "client"
+  },
+  {
+    id: 2,
+    sender: "Priya Patel",
+    email: "priya.patel@example.com",
+    subject: "Question About My Birth Chart",
+    message: "Hello,\n\nI've been trying to understand my birth chart that I received from your service. Could you explain the significance of Jupiter in my 7th house? I'm especially curious about how this affects my relationships.\n\nThanks,\nPriya",
+    date: "2025-05-04",
+    read: false,
+    starred: true,
+    label: "inquiry"
+  },
+  {
+    id: 3,
+    sender: "Amar Kumar",
+    email: "amar.kumar@example.com",
+    subject: "Partnership Proposal",
+    message: "Dear Astral Insights Team,\n\nI represent Celestial Gemstones, a company specializing in gemstones aligned with astrological benefits. I believe there could be a beneficial partnership opportunity between our organizations.\n\nWould you be interested in discussing a potential collaboration?\n\nRegards,\nAmar Kumar\nBusiness Development Manager\nCelestial Gemstones",
+    date: "2025-05-03",
     read: false,
     starred: false,
-    avatar: null
+    label: "business"
   },
-  { 
-    id: 'e2', 
-    from: 'Priya Singh', 
-    email: 'priya@example.com', 
-    subject: 'Feedback on Horoscope Reading', 
-    preview: 'Thank you for the amazing reading last week. Your predictions about my job...',
-    content: 'Dear astroJanak team,\n\nThank you for the amazing reading last week. Your predictions about my job interview were spot on! I got the position just as you mentioned would happen.\n\nI would like to schedule another session for next month.\n\nBest regards,\nPriya Singh',
-    date: '2 hours ago', 
+  {
+    id: 4,
+    sender: "Divya Singh",
+    email: "divya.singh@example.com",
+    subject: "Thank You for the Accurate Prediction",
+    message: "Hi there,\n\nI just wanted to say thank you for the very accurate prediction you made about my career change last month. Everything unfolded exactly as you described, and I'm now in a much better position.\n\nI've recommended your services to several of my friends.\n\nWarm regards,\nDivya Singh",
+    date: "2025-05-02",
     read: true,
     starred: true,
-    avatar: null
+    label: "client"
   },
-  { 
-    id: 'e3', 
-    from: 'Aakash Patel', 
-    email: 'aakash@example.com', 
-    subject: 'Question About Venus Transit', 
-    preview: 'I have been reading about the upcoming Venus transit and how it might...',
-    content: 'Hello,\n\nI have been reading about the upcoming Venus transit and how it might affect my relationship life. As a Taurus, I understand Venus is my ruling planet.\n\nCould you provide some insights on how I can make the most of this transit?\n\nThanks,\nAakash Patel',
-    date: 'Yesterday', 
-    read: false,
-    starred: false,
-    avatar: null
-  },
-  { 
-    id: 'e4', 
-    from: 'Sanjay Sharma', 
-    email: 'sanjay@example.com', 
-    subject: 'Business Partnership Compatibility', 
-    preview: 'I am considering entering into a business partnership and would like to...',
-    content: 'Dear astroJanak,\n\nI am considering entering into a business partnership and would like to know if our birth charts are compatible for this venture.\n\nMy details: March 10, 1985, 10:15 PM, Mumbai\nPartner\'s details: August 22, 1983, 2:30 PM, Bangalore\n\nPlease advise on the astrological compatibility for business purposes.\n\nRegards,\nSanjay Sharma',
-    date: '2 days ago', 
+  {
+    id: 5,
+    sender: "Vikram Joshi",
+    email: "vikram.joshi@example.com",
+    subject: "Issue with My Account",
+    message: "Hello Support Team,\n\nI'm having trouble accessing my account on your website. Whenever I try to log in, it says my password is incorrect, but I'm sure I'm using the right one. I've tried resetting it multiple times without success.\n\nCan you please help me resolve this issue?\n\nThanks,\nVikram Joshi",
+    date: "2025-05-01",
     read: true,
     starred: false,
-    avatar: null
-  },
-  { 
-    id: 'e5', 
-    from: 'Meena Devi', 
-    email: 'meena@example.com', 
-    subject: 'Vastu Consultation for New Home', 
-    preview: 'We have recently purchased a new apartment and would like to have a Vastu...',
-    content: 'Respected Sir,\n\nWe have recently purchased a new apartment and would like to have a Vastu consultation before we move in next month. The property is a 3BHK facing east in Gurgaon.\n\nIs it possible to schedule a visit for assessment? What would be the charges?\n\nThank you,\nMeena Devi',
-    date: '1 week ago', 
-    read: true,
-    starred: true,
-    avatar: null
-  },
+    label: "support"
+  }
 ];
 
 const EmailInbox = () => {
   const { toast } = useToast();
-  const [emails, setEmails] = useState(emailData);
+  const [emails, setEmails] = useState(sampleEmails);
   const [selectedEmail, setSelectedEmail] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentTab, setCurrentTab] = useState('inbox');
-
-  // Count unread emails
-  const unreadCount = emails.filter(email => !email.read).length;
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [replyContent, setReplyContent] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentTab, setCurrentTab] = useState("inbox");
   
-  // Count starred emails
-  const starredCount = emails.filter(email => email.starred).length;
-
-  // Filter emails based on search query
-  const filteredEmails = emails.filter(email => 
-    email.subject.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    email.from.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    email.preview.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  // Get emails for current tab
-  const tabEmails = filteredEmails.filter(email => {
-    if (currentTab === 'inbox') return true;
-    if (currentTab === 'starred') return email.starred;
-    if (currentTab === 'unread') return !email.read;
-    return true;
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  
+  const filteredEmails = emails.filter(email => {
+    // Filter by search term
+    const matchesSearch = email.subject.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          email.sender.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          email.message.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Filter by current tab
+    const matchesTab = 
+      (currentTab === "inbox") ||
+      (currentTab === "starred" && email.starred) ||
+      (currentTab === "sent") ||
+      (currentTab === "drafts");
+    
+    return matchesSearch && matchesTab;
   });
-
-  // Handle email click
+  
   const handleEmailClick = (email) => {
     setSelectedEmail(email);
     
-    // Mark as read if unread
+    // Mark as read
     if (!email.read) {
-      const updatedEmails = emails.map(e => 
-        e.id === email.id ? {...e, read: true} : e
-      );
-      setEmails(updatedEmails);
+      setEmails(emails.map(e => 
+        e.id === email.id ? { ...e, read: true } : e
+      ));
     }
   };
-
-  // Handle star toggle
-  const handleStarToggle = (emailId, event) => {
-    event.stopPropagation();
-    const updatedEmails = emails.map(email => 
-      email.id === emailId ? {...email, starred: !email.starred} : email
-    );
-    setEmails(updatedEmails);
+  
+  const handleStarEmail = (id) => {
+    setEmails(emails.map(email => 
+      email.id === id ? { ...email, starred: !email.starred } : email
+    ));
   };
-
-  // Handle delete email
-  const handleDeleteEmail = (emailId) => {
-    setEmails(emails.filter(email => email.id !== emailId));
+  
+  const handleDeleteEmail = (id) => {
+    setEmails(emails.filter(email => email.id !== id));
     setSelectedEmail(null);
     toast({
       title: "Email Deleted",
-      description: "The email has been moved to trash.",
-      duration: 3000,
+      description: "The email has been moved to trash"
     });
   };
-
-  // Handle reply
-  const handleReply = (email) => {
-    toast({
-      title: "Reply Started",
-      description: `Replying to ${email.from}...`,
-      duration: 3000,
-    });
+  
+  const handleReplyClick = () => {
+    setIsReplyOpen(true);
   };
-
-  // Handle forward
-  const handleForward = (email) => {
+  
+  const handleSendReply = () => {
+    if (!replyContent.trim()) {
+      toast({
+        title: "Empty Reply",
+        description: "Please enter a message before sending",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     toast({
-      title: "Forward Started",
-      description: `Forwarding email from ${email.from}...`,
-      duration: 3000,
+      title: "Reply Sent",
+      description: `Your reply to ${selectedEmail.sender} has been sent`
     });
+    
+    setIsReplyOpen(false);
+    setReplyContent("");
+  };
+  
+  const formatEmailDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  };
+  
+  const getLabelColor = (label) => {
+    switch(label) {
+      case "client": return "bg-blue-500/20 text-blue-300";
+      case "inquiry": return "bg-amber-500/20 text-amber-300";
+      case "business": return "bg-green-500/20 text-green-300";
+      case "support": return "bg-red-500/20 text-red-300";
+      default: return "bg-gray-500/20 text-gray-300";
+    }
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <Card className="cosmic-glass dashboard-content border-cosmic-light/30">
-        <CardHeader className="border-b border-cosmic-light/20">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Mail className="h-6 w-6 text-cosmic-light" />
-              <CardTitle className="text-2xl text-cosmic-light">Email Inbox</CardTitle>
+    <div className="container mx-auto px-4 py-6 space-y-6 animate-fade-in">
+      <Card className="cosmic-glass dashboard-content">
+        <CardHeader>
+          <CardTitle className="text-cosmic-light text-2xl">Email Inbox</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col space-y-4">
+            <div className="flex flex-col md:flex-row gap-4 items-center">
+              <div className="relative flex-grow">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-cosmic-light/70" />
+                <Input 
+                  placeholder="Search emails..." 
+                  className="pl-9 bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+              </div>
+              <Button variant="outline" className="border-cosmic-light/20 text-cosmic-light">
+                <Search className="mr-2 h-4 w-4" />
+                Advanced Search
+              </Button>
             </div>
-            <div className="flex space-x-2">
-              <Button 
-                size="sm" 
-                variant="outline" 
-                onClick={() => toast({
-                  title: "Refresh",
-                  description: "Inbox refreshed",
-                  duration: 2000,
-                })}
-                className="text-cosmic-light border-cosmic-light/20"
-              >
-                Refresh
-              </Button>
-              <Button 
-                size="sm" 
-                onClick={() => toast({
-                  title: "New Message",
-                  description: "Compose new email",
-                  duration: 2000,
-                })}
-              >
-                <MailPlus className="mr-1 h-4 w-4" />
-                New Message
-              </Button>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="md:col-span-1">
+                <div className="space-y-4">
+                  <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full">
+                    <TabsList className="bg-cosmic-dark/30 w-full grid grid-cols-2 md:flex md:flex-col">
+                      <TabsTrigger
+                        value="inbox"
+                        className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light text-cosmic-light"
+                      >
+                        <Mail className="mr-2 h-4 w-4" />
+                        Inbox
+                        <Badge className="ml-auto bg-cosmic-light text-cosmic-dark">5</Badge>
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="starred"
+                        className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light text-cosmic-light"
+                      >
+                        <Star className="mr-2 h-4 w-4" />
+                        Starred
+                        <Badge className="ml-auto bg-cosmic-light text-cosmic-dark">2</Badge>
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="sent"
+                        className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light text-cosmic-light"
+                      >
+                        <Send className="mr-2 h-4 w-4" />
+                        Sent
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="drafts"
+                        className="data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light text-cosmic-light"
+                      >
+                        <Edit className="mr-2 h-4 w-4" />
+                        Drafts
+                      </TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                  
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-cosmic-light">Labels</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30">
+                        Client
+                      </Badge>
+                      <Badge className="bg-amber-500/20 text-amber-300 hover:bg-amber-500/30">
+                        Inquiry
+                      </Badge>
+                      <Badge className="bg-green-500/20 text-green-300 hover:bg-green-500/30">
+                        Business
+                      </Badge>
+                      <Badge className="bg-red-500/20 text-red-300 hover:bg-red-500/30">
+                        Support
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="md:col-span-3 bg-cosmic-dark/40 border border-cosmic-light/10 rounded-lg overflow-hidden">
+                {selectedEmail ? (
+                  <div className="h-[600px] flex flex-col">
+                    <div className="bg-cosmic-dark/60 border-b border-cosmic-light/10 px-4 py-3 flex justify-between items-center">
+                      <h3 className="text-cosmic-light font-medium">{selectedEmail.subject}</h3>
+                      <div className="flex space-x-2">
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent"
+                          onClick={handleReplyClick}
+                        >
+                          <Send className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent"
+                          onClick={() => handleStarEmail(selectedEmail.id)}
+                        >
+                          <Star className={`h-4 w-4 ${selectedEmail.starred ? 'fill-cosmic-accent text-cosmic-accent' : ''}`} />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          className="h-8 w-8 text-cosmic-light hover:text-destructive"
+                          onClick={() => handleDeleteEmail(selectedEmail.id)}
+                        >
+                          <Trash className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 flex items-start space-x-4">
+                      <Avatar className="h-10 w-10 bg-cosmic-accent/20 border border-cosmic-light/30">
+                        <AvatarFallback className="text-cosmic-light">
+                          {selectedEmail.sender.split(' ').map(n => n[0]).join('')}
+                        </AvatarFallback>
+                      </Avatar>
+                      
+                      <div className="flex-grow">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <p className="font-medium text-cosmic-light">{selectedEmail.sender}</p>
+                            <p className="text-sm text-cosmic-light/70">{selectedEmail.email}</p>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-cosmic-light/70">
+                              {formatEmailDate(selectedEmail.date)}
+                            </span>
+                            <Badge className={`${getLabelColor(selectedEmail.label)}`}>
+                              {selectedEmail.label.charAt(0).toUpperCase() + selectedEmail.label.slice(1)}
+                            </Badge>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-4 text-cosmic-light whitespace-pre-wrap">
+                          {selectedEmail.message}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-auto p-4 border-t border-cosmic-light/10">
+                      <Button 
+                        onClick={handleReplyClick}
+                        className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                      >
+                        <Send className="mr-2 h-4 w-4" />
+                        Reply
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-[600px] overflow-y-auto divide-y divide-cosmic-light/10">
+                    {filteredEmails.length > 0 ? (
+                      filteredEmails.map((email, index) => (
+                        <div 
+                          key={email.id} 
+                          className={`p-4 hover:bg-cosmic-dark/60 cursor-pointer transition-colors duration-200 mail-item ${!email.read ? 'bg-cosmic-dark/40' : ''}`}
+                          onClick={() => handleEmailClick(email)}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleStarEmail(email.id);
+                              }}
+                            >
+                              <Star className={`h-4 w-4 ${email.starred ? 'fill-cosmic-accent text-cosmic-accent' : ''}`} />
+                            </Button>
+                            
+                            <Avatar className="h-8 w-8 bg-cosmic-accent/20 border border-cosmic-light/30">
+                              <AvatarFallback className="text-cosmic-light">
+                                {email.sender.split(' ').map(n => n[0]).join('')}
+                              </AvatarFallback>
+                            </Avatar>
+                            
+                            <div className="flex-grow">
+                              <div className="flex justify-between">
+                                <p className={`font-medium ${!email.read ? 'text-cosmic-light' : 'text-cosmic-light/80'}`}>
+                                  {email.sender}
+                                </p>
+                                <p className="text-sm text-cosmic-light/70">
+                                  {formatEmailDate(email.date)}
+                                </p>
+                              </div>
+                              <p className={`text-sm truncate ${!email.read ? 'text-cosmic-light' : 'text-cosmic-light/80'}`}>
+                                {email.subject}
+                              </p>
+                              <p className="text-xs truncate text-cosmic-light/60 mt-1">
+                                {email.message.split('\n')[0]}
+                              </p>
+                            </div>
+                            
+                            <Badge className={`${getLabelColor(email.label)} ml-2`}>
+                              {email.label.charAt(0).toUpperCase() + email.label.slice(1)}
+                            </Badge>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="h-full flex items-center justify-center">
+                        <p className="text-cosmic-light/70">No emails found</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <CardDescription className="text-cosmic-light/70">
-            Manage emails and communications with users
-          </CardDescription>
-        </CardHeader>
-        
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 h-[600px]">
-          {/* Sidebar */}
-          <div className="md:col-span-1 border-r border-cosmic-light/20 p-4 space-y-4">
-            <div className="mb-6">
+        </CardContent>
+      </Card>
+      
+      <Dialog open={isReplyOpen} onOpenChange={setIsReplyOpen}>
+        <DialogContent className="cosmic-glass text-cosmic-light max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Reply to Email</DialogTitle>
+            <DialogDescription className="text-cosmic-light/70">
+              {selectedEmail && `Responding to ${selectedEmail.sender} (${selectedEmail.email})`}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="subject" className="text-cosmic-light">Subject</Label>
               <Input 
-                placeholder="Search emails..." 
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="bg-cosmic-dark/50 border-cosmic-light/30"
-                prefix={<Search className="h-4 w-4 text-cosmic-light/50" />}
+                id="subject"
+                value={selectedEmail ? `Re: ${selectedEmail.subject}` : ""}
+                readOnly
+                className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
               />
             </div>
             
-            <Tabs value={currentTab} onValueChange={setCurrentTab} className="w-full">
-              <TabsList className="bg-cosmic-dark/50 w-full grid grid-cols-3">
-                <TabsTrigger value="inbox" className="data-[state=active]:bg-cosmic-light/20">
-                  Inbox
-                  {unreadCount > 0 && (
-                    <Badge className="ml-2 bg-cosmic-light text-cosmic-dark badge-pulse">{unreadCount}</Badge>
-                  )}
-                </TabsTrigger>
-                <TabsTrigger value="starred" className="data-[state=active]:bg-cosmic-light/20">
-                  Starred
-                  {starredCount > 0 && (
-                    <Badge className="ml-2 bg-cosmic-accent/80 text-cosmic-dark">{starredCount}</Badge>
-                  )}
-                </TabsTrigger>
-                <TabsTrigger value="unread" className="data-[state=active]:bg-cosmic-light/20">
-                  Unread
-                </TabsTrigger>
-              </TabsList>
-            
-              <TabsContent value="inbox" className="mt-0">
-                <div className="space-y-1 mt-4">
-                  {tabEmails.map((email, index) => (
-                    <div 
-                      key={email.id}
-                      className={`p-3 rounded-lg cursor-pointer transition-all mail-item ${
-                        email.read ? 'bg-cosmic-dark/30' : 'bg-cosmic-dark/50'
-                      } hover:bg-cosmic-light/20`}
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                      onClick={() => handleEmailClick(email)}
-                    >
-                      <div className="flex justify-between items-start mb-1">
-                        <div className="font-medium text-white flex items-center">
-                          <button 
-                            className="mr-2 text-cosmic-light/70 hover:text-cosmic-light transition-colors"
-                            onClick={(e) => handleStarToggle(email.id, e)}
-                          >
-                            <Star className={`h-4 w-4 ${email.starred ? 'text-cosmic-light fill-cosmic-light' : ''}`} />
-                          </button>
-                          {!email.read && (
-                            <div className="w-2 h-2 rounded-full bg-cosmic-light mr-2 badge-pulse"></div>
-                          )}
-                          {email.from}
-                        </div>
-                        <span className="text-xs text-cosmic-light/70">{email.date}</span>
-                      </div>
-                      <div className={`text-sm ${email.read ? 'text-cosmic-light/80' : 'text-cosmic-light'}`}>
-                        {email.subject}
-                      </div>
-                      <div className="text-xs text-cosmic-light/60 truncate">
-                        {email.preview}
-                      </div>
-                    </div>
-                  ))}
-                  
-                  {tabEmails.length === 0 && (
-                    <div className="text-center py-8 text-cosmic-light/50">
-                      <Mail className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                      <p>No emails found</p>
-                    </div>
-                  )}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="starred" className="mt-0">
-                {/* Similar content for starred tab */}
-                <div className="space-y-1 mt-4">
-                  {tabEmails.length === 0 ? (
-                    <div className="text-center py-8 text-cosmic-light/50">
-                      <Star className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                      <p>No starred emails</p>
-                    </div>
-                  ) : (
-                    tabEmails.map((email, index) => (
-                      <div 
-                        key={email.id}
-                        className={`p-3 rounded-lg cursor-pointer transition-all mail-item ${
-                          email.read ? 'bg-cosmic-dark/30' : 'bg-cosmic-dark/50'
-                        } hover:bg-cosmic-light/20`}
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                        onClick={() => handleEmailClick(email)}
-                      >
-                        {/* Same email item structure as inbox */}
-                        <div className="flex justify-between items-start mb-1">
-                          <div className="font-medium text-white flex items-center">
-                            <button 
-                              className="mr-2 text-cosmic-light hover:text-cosmic-light transition-colors"
-                              onClick={(e) => handleStarToggle(email.id, e)}
-                            >
-                              <Star className="h-4 w-4 fill-cosmic-light" />
-                            </button>
-                            {!email.read && (
-                              <div className="w-2 h-2 rounded-full bg-cosmic-light mr-2 badge-pulse"></div>
-                            )}
-                            {email.from}
-                          </div>
-                          <span className="text-xs text-cosmic-light/70">{email.date}</span>
-                        </div>
-                        <div className={`text-sm ${email.read ? 'text-cosmic-light/80' : 'text-cosmic-light'}`}>
-                          {email.subject}
-                        </div>
-                        <div className="text-xs text-cosmic-light/60 truncate">
-                          {email.preview}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="unread" className="mt-0">
-                {/* Content for unread tab */}
-                <div className="space-y-1 mt-4">
-                  {tabEmails.length === 0 ? (
-                    <div className="text-center py-8 text-cosmic-light/50">
-                      <Bell className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                      <p>No unread emails</p>
-                    </div>
-                  ) : (
-                    tabEmails.map((email, index) => (
-                      <div 
-                        key={email.id}
-                        className="p-3 rounded-lg cursor-pointer transition-all mail-item bg-cosmic-dark/50 hover:bg-cosmic-light/20"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                        onClick={() => handleEmailClick(email)}
-                      >
-                        {/* Same email item structure */}
-                        <div className="flex justify-between items-start mb-1">
-                          <div className="font-medium text-white flex items-center">
-                            <button 
-                              className="mr-2 text-cosmic-light/70 hover:text-cosmic-light transition-colors"
-                              onClick={(e) => handleStarToggle(email.id, e)}
-                            >
-                              <Star className={`h-4 w-4 ${email.starred ? 'text-cosmic-light fill-cosmic-light' : ''}`} />
-                            </button>
-                            <div className="w-2 h-2 rounded-full bg-cosmic-light mr-2 badge-pulse"></div>
-                            {email.from}
-                          </div>
-                          <span className="text-xs text-cosmic-light/70">{email.date}</span>
-                        </div>
-                        <div className="text-sm text-cosmic-light">
-                          {email.subject}
-                        </div>
-                        <div className="text-xs text-cosmic-light/60 truncate">
-                          {email.preview}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </TabsContent>
-            </Tabs>
+            <div>
+              <Label htmlFor="message" className="text-cosmic-light">Message</Label>
+              <Textarea
+                id="message"
+                placeholder="Type your reply..."
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+                className="min-h-[200px] bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+              />
+            </div>
           </div>
           
-          {/* Email content */}
-          <div className="md:col-span-3 lg:col-span-2 p-6 overflow-auto">
-            {selectedEmail ? (
-              <div className="animate-fade-in">
-                <div className="flex justify-between items-start mb-6">
-                  <h2 className="text-xl font-bold text-cosmic-light">{selectedEmail.subject}</h2>
-                  <div className="flex space-x-2">
-                    <Button 
-                      size="icon" 
-                      variant="ghost" 
-                      className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent"
-                      onClick={() => handleStarToggle(selectedEmail.id, { stopPropagation: () => {} })}
-                    >
-                      <Star className={`h-4 w-4 ${selectedEmail.starred ? 'text-cosmic-light fill-cosmic-light' : ''}`} />
-                    </Button>
-                    <Button 
-                      size="icon" 
-                      variant="ghost" 
-                      className="h-8 w-8 text-cosmic-light hover:text-destructive"
-                      onClick={() => handleDeleteEmail(selectedEmail.id)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="mb-6 flex items-center space-x-3">
-                  <Avatar className="h-10 w-10 border border-cosmic-light/30 shadow-md avatar-glow">
-                    <AvatarFallback className="bg-cosmic-accent/20 text-cosmic-light">
-                      {selectedEmail.from.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <div className="font-medium text-cosmic-light">{selectedEmail.from}</div>
-                    <div className="text-xs text-cosmic-light/70">{selectedEmail.email}</div>
-                  </div>
-                  <div className="ml-auto text-sm text-cosmic-light/70">
-                    {selectedEmail.date}
-                  </div>
-                </div>
-                
-                <div className="border-t border-cosmic-light/20 pt-6 mb-6">
-                  <div className="text-white whitespace-pre-line">
-                    {selectedEmail.content}
-                  </div>
-                </div>
-                
-                <div className="flex space-x-3">
-                  <Button 
-                    onClick={() => handleReply(selectedEmail)}
-                    className="enhanced-btn-transition"
-                  >
-                    <Reply className="mr-2 h-4 w-4" />
-                    Reply
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={() => handleForward(selectedEmail)}
-                    className="text-cosmic-light border-cosmic-light/30 enhanced-btn-transition"
-                  >
-                    <Forward className="mr-2 h-4 w-4" />
-                    Forward
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <div className="h-full flex items-center justify-center flex-col text-cosmic-light/50">
-                <Mail className="h-16 w-16 mb-4 opacity-50" />
-                <p className="text-lg">Select an email to view</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </Card>
+          <DialogFooter>
+            <Button 
+              variant="outline" 
+              onClick={() => setIsReplyOpen(false)}
+              className="border-cosmic-light/20 text-cosmic-light"
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSendReply}
+              className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+            >
+              <Send className="mr-2 h-4 w-4" />
+              Send Reply
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

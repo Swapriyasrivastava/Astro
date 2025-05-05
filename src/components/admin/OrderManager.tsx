@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -146,34 +145,43 @@ const OrderManager = () => {
       <Tabs defaultValue="all" className="space-y-4" onValueChange={setCurrentTab}>
         <div className="cosmic-glass p-1.5 rounded-lg inline-block">
           <TabsList className="bg-cosmic-dark/30">
-            <TabsTrigger value="all" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger 
+              value="all" 
+              className="text-cosmic-light data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light"
+            >
               All Orders
             </TabsTrigger>
-            <TabsTrigger value="recent" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger 
+              value="recent" 
+              className="text-cosmic-light data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light"
+            >
               Recent Orders
             </TabsTrigger>
-            <TabsTrigger value="processing" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger 
+              value="processing" 
+              className="text-cosmic-light data-[state=active]:bg-cosmic-accent/20 data-[state=active]:text-cosmic-light"
+            >
               Processing
             </TabsTrigger>
           </TabsList>
         </div>
       
         <TabsContent value={currentTab}>
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-cosmic-light">Orders</CardTitle>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <Select value={filterStatus} onValueChange={setFilterStatus}>
                     <SelectTrigger className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light w-32 h-8">
-                      <SelectValue placeholder="Filter status" />
+                      <SelectValue placeholder="Filter status" className="text-cosmic-light" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="processing">Processing</SelectItem>
-                      <SelectItem value="delivered">Delivered</SelectItem>
-                      <SelectItem value="cancelled">Cancelled</SelectItem>
+                    <SelectContent className="bg-cosmic-dark/80 border-cosmic-light/20">
+                      <SelectItem value="all" className="text-cosmic-light">All Status</SelectItem>
+                      <SelectItem value="pending" className="text-cosmic-light">Pending</SelectItem>
+                      <SelectItem value="processing" className="text-cosmic-light">Processing</SelectItem>
+                      <SelectItem value="delivered" className="text-cosmic-light">Delivered</SelectItem>
+                      <SelectItem value="cancelled" className="text-cosmic-light">Cancelled</SelectItem>
                     </SelectContent>
                   </Select>
                   <div className="relative">

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -161,7 +160,7 @@ const UserManager = () => {
         </Button>
       </div>
       
-      <Card className="cosmic-glass">
+      <Card className="cosmic-glass dashboard-content">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-cosmic-light">User List</CardTitle>
@@ -169,23 +168,23 @@ const UserManager = () => {
               <div className="flex items-center gap-2">
                 <Select value={filterRole} onValueChange={setFilterRole}>
                   <SelectTrigger className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light w-28 h-8">
-                    <SelectValue placeholder="Filter role" />
+                    <SelectValue placeholder="Filter role" className="text-cosmic-light" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="moderator">Moderator</SelectItem>
-                    <SelectItem value="user">User</SelectItem>
+                  <SelectContent className="bg-cosmic-dark/80 border-cosmic-light/20">
+                    <SelectItem value="all" className="text-cosmic-light">All Roles</SelectItem>
+                    <SelectItem value="admin" className="text-cosmic-light">Admin</SelectItem>
+                    <SelectItem value="moderator" className="text-cosmic-light">Moderator</SelectItem>
+                    <SelectItem value="user" className="text-cosmic-light">User</SelectItem>
                   </SelectContent>
                 </Select>
                 <Select value={filterStatus} onValueChange={setFilterStatus}>
                   <SelectTrigger className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light w-28 h-8">
-                    <SelectValue placeholder="Filter status" />
+                    <SelectValue placeholder="Filter status" className="text-cosmic-light" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Status</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
+                  <SelectContent className="bg-cosmic-dark/80 border-cosmic-light/20">
+                    <SelectItem value="all" className="text-cosmic-light">All Status</SelectItem>
+                    <SelectItem value="active" className="text-cosmic-light">Active</SelectItem>
+                    <SelectItem value="inactive" className="text-cosmic-light">Inactive</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -311,12 +310,12 @@ const UserManager = () => {
                   <Label htmlFor="role" className="text-cosmic-light">Role</Label>
                   <Select value={editForm.role} onValueChange={handleRoleChange}>
                     <SelectTrigger id="role" className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light">
-                      <SelectValue placeholder="Select role" />
+                      <SelectValue placeholder="Select role" className="text-cosmic-light" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="moderator">Moderator</SelectItem>
-                      <SelectItem value="user">User</SelectItem>
+                    <SelectContent className="bg-cosmic-dark/80 border-cosmic-light/20">
+                      <SelectItem value="admin" className="text-cosmic-light">Admin</SelectItem>
+                      <SelectItem value="moderator" className="text-cosmic-light">Moderator</SelectItem>
+                      <SelectItem value="user" className="text-cosmic-light">User</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -324,11 +323,11 @@ const UserManager = () => {
                   <Label htmlFor="status" className="text-cosmic-light">Status</Label>
                   <Select value={editForm.status} onValueChange={handleStatusChange}>
                     <SelectTrigger id="status" className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light">
-                      <SelectValue placeholder="Select status" />
+                      <SelectValue placeholder="Select status" className="text-cosmic-light" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="active">Active</SelectItem>
-                      <SelectItem value="inactive">Inactive</SelectItem>
+                    <SelectContent className="bg-cosmic-dark/80 border-cosmic-light/20">
+                      <SelectItem value="active" className="text-cosmic-light">Active</SelectItem>
+                      <SelectItem value="inactive" className="text-cosmic-light">Inactive</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
