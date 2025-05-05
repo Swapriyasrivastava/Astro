@@ -123,6 +123,11 @@ input, select, textarea {
   @apply bg-cosmic-light/20 text-cosmic-light;
 }
 
+/* Fix sidebar menu button hover */
+[data-sidebar="menu-button"]:hover {
+  @apply bg-cosmic-light/20 text-cosmic-light;
+}
+
 /* Improve text contrast */
 .text-high-contrast {
   @apply text-cosmic-light font-medium;
