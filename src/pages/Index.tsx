@@ -21,26 +21,26 @@ const Index = () => {
     <div className="min-h-screen relative overflow-hidden flex flex-col justify-center items-center">
       <StarField />
       
-      <div className="container mx-auto px-4 text-center max-w-3xl z-10">
-        <div className="animate-float mb-4">
+      <div className="container mx-auto px-4 text-center max-w-3xl z-10 flex flex-col items-center">
+        <div className="animate-float mb-6">
           <img 
             src="/lovable-uploads/a05f37b6-9dd7-431e-aa94-20ce9e891375.png" 
             alt="astroJanak Logo" 
-            className="h-48 mx-auto object-contain"
+            className="h-52 mx-auto object-contain logo-pulse"
           />
         </div>
         
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cosmic-light text-glow mb-4 animate-fade-in">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-cosmic-light text-glow mb-6 animate-fade-in">
           astroJanak Portal
         </h1>
         
-        <p className="text-lg md:text-xl text-cosmic-light/80 mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+        <p className="text-lg md:text-xl lg:text-2xl text-cosmic-light mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
           Enter the cosmic realm to manage your celestial dashboard.
         </p>
         
         <Button
           onClick={() => setIsAuthModalOpen(true)}
-          className="bg-cosmic-light hover:bg-cosmic text-cosmic-dark font-semibold px-8 py-4 text-lg animate-fade-in mt-4 btn-hover-effect"
+          className="bg-cosmic-light hover:bg-cosmic text-cosmic-dark font-semibold px-10 py-6 text-xl animate-fade-in mt-4 btn-hover-effect shadow-lg"
           style={{ animationDelay: "0.3s" }}
         >
           Access Portal

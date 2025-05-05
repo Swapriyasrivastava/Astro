@@ -19,6 +19,12 @@
   }
 }
 
+/* Light modal style for AuthModal */
+.light-modal {
+  @apply bg-white/85 backdrop-blur-xl border border-cosmic-light/30 shadow-lg;
+  box-shadow: 0 4px 30px rgba(255, 87, 34, 0.3);
+}
+
 /* Enhanced cosmic glass effect */
 .cosmic-glass {
   @apply bg-black/70 backdrop-blur-xl border border-cosmic-light/30 shadow-lg hover:shadow-xl transition-shadow duration-300;

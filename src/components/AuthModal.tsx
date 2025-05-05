@@ -76,11 +76,11 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="cosmic-glass max-w-md w-full p-6 animate-fade-in relative overflow-hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="absolute inset-0 bg-cosmic-gradient opacity-10 animate-pulse"></div>
+      <DialogContent className="light-modal max-w-md w-full p-6 animate-fade-in fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-cosmic-light/20 opacity-90 rounded-2xl"></div>
         
         <DialogHeader className="relative z-10">
-          <DialogTitle className="flex flex-col items-center gap-2">
+          <DialogTitle className="flex flex-col items-center gap-3 mb-2">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse-star">
                 <Sparkles className="w-8 h-8 text-cosmic-light absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
@@ -89,27 +89,27 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
                 <img 
                   src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
                   alt="astroJanak Logo" 
-                  className="h-16 object-contain"
+                  className="h-20 object-contain"
                 />
               </div>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-cosmic-light via-cosmic-accent to-cosmic-light bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-cosmic-dark">
               astroJanak Access Portal
             </span>
           </DialogTitle>
         </DialogHeader>
         
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "login" | "reset")} className="relative z-10 w-full mt-4">
-          <TabsList className="grid grid-cols-2 w-full bg-cosmic-dark/50">
+          <TabsList className="grid grid-cols-2 w-full bg-white/50 rounded-lg">
             <TabsTrigger 
               value="login" 
-              className="data-[state=active]:bg-cosmic-light/20 data-[state=active]:text-cosmic-light transition-all duration-300"
+              className="data-[state=active]:bg-cosmic-light data-[state=active]:text-white transition-all duration-300 text-cosmic-dark font-medium"
             >
               Login
             </TabsTrigger>
             <TabsTrigger 
               value="reset" 
-              className="data-[state=active]:bg-cosmic-light/20 data-[state=active]:text-cosmic-light transition-all duration-300"
+              className="data-[state=active]:bg-cosmic-light data-[state=active]:text-white transition-all duration-300 text-cosmic-dark font-medium"
             >
               Reset Password
             </TabsTrigger>
@@ -118,16 +118,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
           <TabsContent value="login" className="space-y-4 mt-4">
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-cosmic-light">Email Address</Label>
+                <Label htmlFor="email" className="text-cosmic-dark font-medium">Email Address</Label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="cosmic.traveler@astrojanak.com"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
@@ -135,24 +135,24 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
               
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label htmlFor="password" className="text-cosmic-light">Password</Label>
+                  <Label htmlFor="password" className="text-cosmic-dark font-medium">Password</Label>
                   <button 
                     type="button" 
-                    className="text-cosmic-accent text-xs hover:text-cosmic-light transition-colors"
+                    className="text-cosmic text-xs hover:text-cosmic-dark transition-colors font-medium"
                     onClick={() => setActiveTab("reset")}
                   >
                     Forgot Password?
                   </button>
                 </div>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
@@ -160,7 +160,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
               
               <Button 
                 type="submit" 
-                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300 btn-hover-effect"
+                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-white font-semibold transition-all duration-300 btn-hover-effect shadow-md"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -178,73 +178,73 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
           <TabsContent value="reset" className="space-y-4 mt-4">
             <form onSubmit={handleReset} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="reset-email" className="text-cosmic-light">Email Address</Label>
+                <Label htmlFor="reset-email" className="text-cosmic-dark font-medium">Email Address</Label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="reset-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="cosmic.traveler@astrojanak.com"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="security-q" className="text-cosmic-light">{securityQuestion}</Label>
+                <Label htmlFor="security-q" className="text-cosmic-dark font-medium">{securityQuestion}</Label>
                 <div className="relative group">
-                  <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="security-q"
                     value={securityAnswer}
                     onChange={(e) => setSecurityAnswer(e.target.value)}
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="new-password" className="text-cosmic-light">New Password</Label>
+                <Label htmlFor="new-password" className="text-cosmic-dark font-medium">New Password</Label>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="new-password"
                     type="password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="confirm-password" className="text-cosmic-light">Confirm New Password</Label>
+                <Label htmlFor="confirm-password" className="text-cosmic-dark font-medium">Confirm New Password</Label>
                 <div className="relative group">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light/70 h-4 w-4 transition-colors group-hover:text-cosmic-accent" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cosmic-light h-4 w-4 transition-colors group-hover:text-cosmic" />
                   <Input 
                     id="confirm-password"
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="pl-10 bg-cosmic-dark/30 border-cosmic-light/30 focus:border-cosmic-accent transition-all duration-300 hover:bg-cosmic-dark/40 text-white"
+                    className="pl-10 bg-white/80 border-cosmic-light/50 focus:border-cosmic text-cosmic-dark font-medium transition-all duration-300 hover:bg-white"
                     required
                   />
                 </div>
                 {passwordError && (
-                  <p className="text-red-400 text-sm">{passwordError}</p>
+                  <p className="text-red-500 text-sm font-medium">{passwordError}</p>
                 )}
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-cosmic-dark font-semibold transition-all duration-300 btn-hover-effect"
+                className="w-full bg-cosmic-light hover:bg-cosmic hover:scale-[1.02] active:scale-[0.98] text-white font-semibold transition-all duration-300 btn-hover-effect shadow-md"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -259,8 +259,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
               
               <Button 
                 type="button" 
-                variant="ghost" 
-                className="w-full text-cosmic-light hover:bg-cosmic-dark/30 transition-all duration-300"
+                variant="outline" 
+                className="w-full text-cosmic hover:text-white hover:bg-cosmic transition-all duration-300 border-cosmic-light/30"
                 onClick={() => setActiveTab("login")}
               >
                 Back to Login
