@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -224,10 +225,10 @@ const BlogPage = () => {
               <Card key={blog.id} className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5 hover:bg-cosmic-dark/30 transition-colors">
                 <CardHeader>
                   <div className="text-cosmic-accent text-sm">{blog.category}</div>
-                  <CardTitle className="text-xl font-bold text-cosmic-light">{blog.title}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-white">{blog.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-cosmic-light/80">{blog.excerpt}</p>
+                  <p className="text-white">{blog.excerpt}</p>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <div className="text-cosmic-light/60 text-sm">By {blog.author} • {blog.publishDate}</div>

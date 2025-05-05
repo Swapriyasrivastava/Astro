@@ -152,3 +152,43 @@ input, select, textarea {
 .tab-active {
   @apply bg-cosmic-light/30 text-cosmic-light;
 }
+
+/* About page specific styles */
+.about-content p {
+  @apply text-white;
+}
+
+.about-content h3 {
+  @apply text-cosmic-light;
+}
+
+/* Logo animation */
+.logo-pulse {
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+  }
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+/* Dashboard content background */
+.dashboard-content {
+  @apply bg-cosmic-dark/70 border border-cosmic-light/20 rounded-lg shadow-lg;
+}
+
+/* Fix sidebar button visibility on active state */
+[data-sidebar="menu-button"][data-active="true"] {
+  @apply bg-cosmic-light/20 text-cosmic-light !important;
+}
+

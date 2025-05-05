@@ -50,7 +50,7 @@ const AdminPanel = () => {
   const renderView = () => {
     switch (currentView) {
       case 'dashboard':
-        return <AdminDashboard />;
+        return <div className="dashboard-content p-6"><AdminDashboard /></div>;
       case 'settings':
         return <AdminSettings />;
       case 'horoscopes':
@@ -72,7 +72,7 @@ const AdminPanel = () => {
       case 'contact':
         return <ContactPage />;
       default:
-        return <AdminDashboard />;
+        return <div className="dashboard-content p-6"><AdminDashboard /></div>;
     }
   };
 
@@ -86,7 +86,7 @@ const AdminPanel = () => {
               <img 
                 src="/lovable-uploads/a05f37b6-9dd7-431e-aa94-20ce9e891375.png" 
                 alt="astroJanak Logo" 
-                className="h-12 w-36 object-contain" 
+                className="h-12 w-36 object-contain logo-pulse" 
               />
             </div>
           </SidebarHeader>
@@ -101,7 +101,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'dashboard'} 
                       tooltip="Dashboard"
                       onClick={() => handleMenuClick('dashboard')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'dashboard' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <LayoutDashboard className="h-4 w-4" />
                       <span>Dashboard</span>
@@ -112,7 +112,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'orders'} 
                       tooltip="Orders"
                       onClick={() => handleMenuClick('orders')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'orders' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Package className="h-4 w-4" />
                       <span>Orders</span>
@@ -123,7 +123,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'horoscopes'} 
                       tooltip="Horoscopes"
                       onClick={() => handleMenuClick('horoscopes')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'horoscopes' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Star className="h-4 w-4" />
                       <span>Horoscopes</span>
@@ -142,7 +142,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'about'} 
                       tooltip="About"
                       onClick={() => handleMenuClick('about')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'about' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Book className="h-4 w-4" />
                       <span>About</span>
@@ -153,7 +153,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'blog'} 
                       tooltip="Blog"
                       onClick={() => handleMenuClick('blog')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'blog' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <FileText className="h-4 w-4" />
                       <span>Blog</span>
@@ -164,7 +164,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'contact'} 
                       tooltip="Contact"
                       onClick={() => handleMenuClick('contact')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'contact' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Contact className="h-4 w-4" />
                       <span>Contact</span>
@@ -183,7 +183,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'kundli'} 
                       tooltip="Kundli Manager"
                       onClick={() => handleMenuClick('kundli')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'kundli' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Star className="h-4 w-4" />
                       <span>Kundli Manager</span>
@@ -194,7 +194,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'users'} 
                       tooltip="User Manager"
                       onClick={() => handleMenuClick('users')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'users' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Users className="h-4 w-4" />
                       <span>User Manager</span>
@@ -205,7 +205,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'content'} 
                       tooltip="Content Manager"
                       onClick={() => handleMenuClick('content')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'content' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <FileText className="h-4 w-4" />
                       <span>Content Manager</span>
@@ -216,7 +216,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'payments'} 
                       tooltip="Payment Manager"
                       onClick={() => handleMenuClick('payments')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'payments' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <CreditCard className="h-4 w-4" />
                       <span>Payment Manager</span>
@@ -235,7 +235,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'settings'}
                       tooltip="Settings"
                       onClick={() => handleMenuClick('settings')}
-                      className={`hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 ${currentView === 'settings' ? 'text-cosmic-light bg-cosmic-light/20' : 'text-cosmic-light'}`}
+                      className={`transition-all duration-300 text-white`}
                     >
                       <Settings className="h-4 w-4" />
                       <span>Settings</span>
@@ -248,7 +248,7 @@ const AdminPanel = () => {
                         title: "Email System",
                         description: "Communication tools coming soon."
                       })}
-                      className="hover:bg-cosmic-light/20 hover:text-cosmic-light transition-all duration-300 text-cosmic-light"
+                      className="transition-all duration-300 text-white"
                     >
                       <Mail className="h-4 w-4" />
                       <span>Email</span>
@@ -264,7 +264,7 @@ const AdminPanel = () => {
               <Button
                 onClick={logout}
                 variant="outline"
-                className="w-full justify-start text-cosmic-light hover:bg-cosmic-light/20 hover:text-cosmic-light border-cosmic-light/30 btn-hover-effect animate-border-glow"
+                className="w-full justify-start text-white hover:bg-cosmic-light/20 hover:text-cosmic-light border-cosmic-light/30 btn-hover-effect animate-border-glow"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
@@ -295,13 +295,13 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="relative animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-cosmic-light"
+                    className="relative animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
                     onClick={() => toast({ 
                       title: "Notifications", 
                       description: "You have 3 unread notifications" 
                     })}
                   >
-                    <Bell className="text-cosmic-light" />
+                    <Bell className="text-white" />
                     {notifications > 0 && (
                       <span className="absolute top-1 right-1 w-2 h-2 bg-cosmic-light rounded-full animate-pulse"></span>
                     )}
@@ -310,25 +310,25 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-cosmic-light"
+                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
                     onClick={() => toast({ 
                       title: "Messages", 
                       description: "No new messages" 
                     })}
                   >
-                    <Mail className="text-cosmic-light" />
+                    <Mail className="text-white" />
                   </Button>
                   
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-cosmic-light"
+                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
                     onClick={() => toast({ 
                       title: "Theme Settings", 
                       description: "Toggle between light and dark mode" 
                     })}
                   >
-                    <Sun className="text-cosmic-light" />
+                    <Sun className="text-white" />
                   </Button>
                   
                   <div className="relative group">
