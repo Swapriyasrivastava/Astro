@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 const AboutPage = () => {
   return (
     <div className="space-y-6 animate-fade-in">
-      <Card className="cosmic-glass bg-cosmic-dark/40 border-cosmic-light/10">
+      <Card className="cosmic-glass dashboard-content">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-cosmic-light">About Astral Insights</CardTitle>
         </CardHeader>

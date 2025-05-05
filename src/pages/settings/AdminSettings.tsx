@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
-import { Globe, Lock, User, Palette, Bell, ShieldAlert, Database } from "lucide-react";
+import { Globe, Lock, User, Palette, Bell, ShieldAlert, Database, Eye, EyeOff } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const AdminSettings = () => {
   const { toast } = useToast();
@@ -32,6 +34,24 @@ const AdminSettings = () => {
     systemAlerts: true,
     marketingEmails: false
   });
+  
+  const [appearanceSettings, setAppearanceSettings] = useState({
+    theme: "cosmic",
+    animations: true,
+    compactSidebar: false,
+    fontSize: "medium"
+  });
+  
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
+  
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
 
   const handleGeneralSettingsChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +73,88 @@ const AdminSettings = () => {
       ...prev,
       [key]: !prev[key]
     }));
+  };
+  
+  const handleAppearanceChange = (key, value) => {
+    setAppearanceSettings(prev => ({
+      ...prev,
+      [key]: value
+    }));
+    
+    // Apply font size change immediately
+    if (key === 'fontSize') {
+      document.documentElement.style.fontSize = 
+        value === 'small' ? '14px' : 
+        value === 'large' ? '18px' : '16px';
+      
+      toast({
+        title: "Font Size Changed",
+        description: `Text size set to ${value}`,
+        duration: 2000,
+      });
+    }
+    
+    // Apply theme change
+    if (key === 'theme') {
+      toast({
+        title: "Theme Changed",
+        description: `Theme set to ${value}`,
+        duration: 2000,
+      });
+    }
+  };
+  
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear errors when typing
+    if (passwordError) setPasswordError("");
+  };
+  
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Validation
+    if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+      setPasswordError("All fields are required");
+      setIsLoading(false);
+      return;
+    }
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError("New passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+    
+    if (passwordData.newPassword.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
+      setIsLoading(false);
+      return;
+    }
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowPasswordDialog(false);
+      // Reset form
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: ""
+      });
+      
+      toast({
+        title: "Password Updated",
+        description: "Your password has been changed successfully",
+        duration: 3000,
+      });
+    }, 1500);
   };
 
   const handleSaveSettings = (settingType) => {
@@ -103,7 +205,7 @@ const AdminSettings = () => {
 
         {/* General Settings */}
         <TabsContent value="general" className="space-y-4">
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <CardTitle className="text-cosmic-light">General Settings</CardTitle>
               <CardDescription className="text-cosmic-accent">
@@ -188,7 +290,7 @@ const AdminSettings = () => {
 
         {/* Security Settings */}
         <TabsContent value="security" className="space-y-4">
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Security Settings</CardTitle>
               <CardDescription className="text-cosmic-accent">
@@ -268,7 +370,7 @@ const AdminSettings = () => {
 
         {/* Notifications Settings */}
         <TabsContent value="notifications" className="space-y-4">
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Notification Preferences</CardTitle>
               <CardDescription className="text-cosmic-accent">
@@ -333,9 +435,9 @@ const AdminSettings = () => {
           </Card>
         </TabsContent>
 
-        {/* Account Settings and Appearance tabs would be implemented similarly */}
+        {/* Account Settings Tab */}
         <TabsContent value="account" className="space-y-4">
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Account Settings</CardTitle>
               <CardDescription className="text-cosmic-accent">
@@ -362,16 +464,111 @@ const AdminSettings = () => {
                 </div>
               </div>
               <div className="pt-4 border-t border-cosmic-light/10">
-                <Button 
-                  variant="outline"
-                  className="border-cosmic-light/20 text-cosmic-light hover:bg-cosmic-accent/20"
-                  onClick={() => toast({
-                    title: "Password Reset",
-                    description: "Password reset link has been sent to your email.",
-                  })}
-                >
-                  Change Password
-                </Button>
+                <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
+                  <DialogTrigger asChild>
+                    <Button 
+                      variant="outline"
+                      className="border-cosmic-light/20 text-cosmic-light hover:bg-cosmic-accent/20"
+                    >
+                      <Lock className="mr-2 h-4 w-4" />
+                      Change Password
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="cosmic-glass border-cosmic-light/30 text-white">
+                    <DialogHeader>
+                      <DialogTitle className="text-cosmic-light">Change Password</DialogTitle>
+                      <DialogDescription className="text-cosmic-light/70">
+                        Enter your current password and a new password
+                      </DialogDescription>
+                    </DialogHeader>
+                    
+                    <form onSubmit={handlePasswordSubmit} className="space-y-4 py-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="currentPassword" className="text-cosmic-light">Current Password</Label>
+                        <div className="relative">
+                          <Input 
+                            id="currentPassword"
+                            name="currentPassword"
+                            type={showCurrentPassword ? "text" : "password"}
+                            className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light pr-10"
+                            value={passwordData.currentPassword}
+                            onChange={handlePasswordChange}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-cosmic-light/70 hover:text-cosmic-light"
+                            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                          >
+                            {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="newPassword" className="text-cosmic-light">New Password</Label>
+                        <div className="relative">
+                          <Input 
+                            id="newPassword"
+                            name="newPassword"
+                            type={showNewPassword ? "text" : "password"}
+                            className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light pr-10"
+                            value={passwordData.newPassword}
+                            onChange={handlePasswordChange}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-cosmic-light/70 hover:text-cosmic-light"
+                            onClick={() => setShowNewPassword(!showNewPassword)}
+                          >
+                            {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="confirmPassword" className="text-cosmic-light">Confirm New Password</Label>
+                        <Input 
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          type="password"
+                          className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
+                          value={passwordData.confirmPassword}
+                          onChange={handlePasswordChange}
+                        />
+                      </div>
+                      
+                      {passwordError && (
+                        <div className="text-red-400 text-sm">{passwordError}</div>
+                      )}
+                      
+                      <DialogFooter className="pt-4">
+                        <Button 
+                          type="button"
+                          variant="outline"
+                          className="border-cosmic-light/20 text-cosmic-light hover:bg-cosmic-light/10"
+                          onClick={() => {
+                            setShowPasswordDialog(false);
+                            setPasswordData({
+                              currentPassword: "",
+                              newPassword: "",
+                              confirmPassword: ""
+                            });
+                            setPasswordError("");
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                        <Button 
+                          type="submit"
+                          className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90"
+                          disabled={isLoading}
+                        >
+                          {isLoading ? "Saving..." : "Update Password"}
+                        </Button>
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
@@ -386,8 +583,9 @@ const AdminSettings = () => {
           </Card>
         </TabsContent>
         
+        {/* Appearance Settings Tab */}
         <TabsContent value="appearance" className="space-y-4">
-          <Card className="cosmic-glass">
+          <Card className="cosmic-glass dashboard-content">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Appearance Settings</CardTitle>
               <CardDescription className="text-cosmic-accent">
@@ -399,19 +597,20 @@ const AdminSettings = () => {
                 <div>
                   <Label className="text-cosmic-light mb-2 block">Color Theme</Label>
                   <div className="grid grid-cols-4 gap-4">
-                    {["cosmic", "dark", "light", "blue"].map((theme) => (
+                    {[
+                      { name: "cosmic", gradient: "bg-gradient-to-r from-purple-600 to-red-500" },
+                      { name: "dark", gradient: "bg-gradient-to-r from-gray-900 to-gray-700" },
+                      { name: "light", gradient: "bg-gradient-to-r from-gray-200 to-gray-300" },
+                      { name: "blue", gradient: "bg-gradient-to-r from-blue-600 to-blue-800" }
+                    ].map((theme) => (
                       <div 
-                        key={theme}
+                        key={theme.name}
                         className={`h-10 rounded-md cursor-pointer transition-all hover:scale-105 ${
-                          theme === "cosmic" ? "bg-gradient-to-r from-purple-600 to-blue-500 ring-2 ring-cosmic-accent" :
-                          theme === "dark" ? "bg-gray-800" :
-                          theme === "light" ? "bg-gray-200" :
-                          "bg-blue-600"
+                          theme.gradient
+                        } ${
+                          appearanceSettings.theme === theme.name ? "ring-2 ring-cosmic-accent shadow-lg" : ""
                         }`}
-                        onClick={() => toast({
-                          title: "Theme Changed",
-                          description: `Theme set to ${theme}.`,
-                        })}
+                        onClick={() => handleAppearanceChange('theme', theme.name)}
                       />
                     ))}
                   </div>
@@ -422,7 +621,8 @@ const AdminSettings = () => {
                     <p className="text-cosmic-light/70 text-sm">Enable UI animations</p>
                   </div>
                   <Switch 
-                    defaultChecked={true}
+                    checked={appearanceSettings.animations}
+                    onCheckedChange={(checked) => handleAppearanceChange('animations', checked)}
                     className="data-[state=checked]:bg-cosmic-accent"
                   />
                 </div>
@@ -432,7 +632,8 @@ const AdminSettings = () => {
                     <p className="text-cosmic-light/70 text-sm">Use a more compact sidebar layout</p>
                   </div>
                   <Switch 
-                    defaultChecked={false}
+                    checked={appearanceSettings.compactSidebar}
+                    onCheckedChange={(checked) => handleAppearanceChange('compactSidebar', checked)}
                     className="data-[state=checked]:bg-cosmic-accent"
                   />
                 </div>
@@ -441,7 +642,8 @@ const AdminSettings = () => {
                   <select
                     id="fontSize"
                     className="w-full h-10 rounded-md border border-cosmic-light/20 bg-cosmic-dark/30 px-3 py-2 text-base text-cosmic-light"
-                    defaultValue="medium"
+                    value={appearanceSettings.fontSize}
+                    onChange={(e) => handleAppearanceChange('fontSize', e.target.value)}
                   >
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>

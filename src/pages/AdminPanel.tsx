@@ -25,6 +25,7 @@ import PaymentManager from '@/components/admin/PaymentManager';
 import AboutPage from '@/pages/About';
 import BlogPage from '@/pages/Blog';
 import ContactPage from '@/pages/Contact';
+import EmailInbox from '@/components/admin/EmailInbox';
 
 const AdminPanel = () => {
   const { user, logout } = useAuth();
@@ -71,6 +72,8 @@ const AdminPanel = () => {
         return <BlogPage />;
       case 'contact':
         return <ContactPage />;
+      case 'email':
+        return <EmailInbox />;
       default:
         return <div className="dashboard-content p-6"><AdminDashboard /></div>;
     }
@@ -127,6 +130,28 @@ const AdminPanel = () => {
                     >
                       <Star className="h-4 w-4" />
                       <span>Horoscopes</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+
+            <SidebarGroup>
+              <SidebarGroupLabel className="text-cosmic-light">Communication</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton 
+                      isActive={currentView === 'email'} 
+                      tooltip="Email"
+                      onClick={() => handleMenuClick('email')}
+                      className={`transition-all duration-300 text-white`}
+                    >
+                      <Mail className="h-4 w-4" />
+                      <span>Email</span>
+                      <div className="ml-auto bg-cosmic-light text-cosmic-dark text-xs rounded-full w-5 h-5 flex items-center justify-center badge-pulse">
+                        5
+                      </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -241,19 +266,6 @@ const AdminPanel = () => {
                       <span>Settings</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton 
-                      tooltip="Email"
-                      onClick={() => toast({
-                        title: "Email System",
-                        description: "Communication tools coming soon."
-                      })}
-                      className="transition-all duration-300 text-white"
-                    >
-                      <Mail className="h-4 w-4" />
-                      <span>Email</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
@@ -311,12 +323,10 @@ const AdminPanel = () => {
                     variant="ghost" 
                     size="icon" 
                     className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
-                    onClick={() => toast({ 
-                      title: "Messages", 
-                      description: "No new messages" 
-                    })}
+                    onClick={() => handleMenuClick('email')}
                   >
                     <Mail className="text-white" />
+                    <span className="absolute top-1 right-1 w-2 h-2 bg-cosmic-light rounded-full animate-pulse"></span>
                   </Button>
                   
                   <Button 
@@ -332,7 +342,7 @@ const AdminPanel = () => {
                   </Button>
                   
                   <div className="relative group">
-                    <Avatar className="h-8 w-8 transition-transform hover:scale-110 bg-cosmic-light/20 border border-cosmic-light/30">
+                    <Avatar className="h-8 w-8 transition-transform hover:scale-110 bg-cosmic-light/20 border border-cosmic-light/30 avatar-glow">
                       <AvatarFallback className="bg-cosmic-light/20 text-cosmic-light">
                         <User className="h-4 w-4" />
                       </AvatarFallback>
