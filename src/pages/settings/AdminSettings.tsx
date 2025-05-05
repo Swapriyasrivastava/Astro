@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,9 +13,9 @@ const AdminSettings = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [generalSettings, setGeneralSettings] = useState({
-    siteName: "Astral Admin",
+    siteName: "astroJanak Admin",
     siteDescription: "The ultimate astrology management system",
-    adminEmail: "admin@astral.com",
+    adminEmail: "admin@astrojanak.com",
     language: "en"
   });
   
@@ -79,23 +78,23 @@ const AdminSettings = () => {
       <Tabs defaultValue="general" className="space-y-4">
         <div className="cosmic-glass p-1.5 rounded-lg inline-block">
           <TabsList className="bg-cosmic-dark/30">
-            <TabsTrigger value="general" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="general" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <Globe className="mr-2 h-4 w-4" />
               General
             </TabsTrigger>
-            <TabsTrigger value="security" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="security" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <Lock className="mr-2 h-4 w-4" />
               Security
             </TabsTrigger>
-            <TabsTrigger value="account" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="account" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <User className="mr-2 h-4 w-4" />
               Account
             </TabsTrigger>
-            <TabsTrigger value="appearance" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="appearance" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <Palette className="mr-2 h-4 w-4" />
               Appearance
             </TabsTrigger>
-            <TabsTrigger value="notifications" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="notifications" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <Bell className="mr-2 h-4 w-4" />
               Notifications
             </TabsTrigger>
@@ -107,7 +106,7 @@ const AdminSettings = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">General Settings</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Manage your website's general configuration
               </CardDescription>
             </CardHeader>
@@ -118,7 +117,7 @@ const AdminSettings = () => {
                   <Input 
                     id="siteName"
                     name="siteName"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={generalSettings.siteName}
                     onChange={handleGeneralSettingsChange}
                   />
@@ -128,7 +127,7 @@ const AdminSettings = () => {
                   <Input 
                     id="adminEmail"
                     name="adminEmail"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={generalSettings.adminEmail}
                     onChange={handleGeneralSettingsChange}
                   />
@@ -138,7 +137,7 @@ const AdminSettings = () => {
                   <Textarea 
                     id="siteDescription"
                     name="siteDescription"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={generalSettings.siteDescription}
                     onChange={handleGeneralSettingsChange}
                     rows={3}
@@ -149,7 +148,7 @@ const AdminSettings = () => {
                   <select 
                     id="language"
                     name="language"
-                    className="w-full h-10 rounded-md border border-cosmic-light/20 bg-cosmic-dark/30 px-3 py-2 text-base text-cosmic-light"
+                    className="w-full h-10 rounded-md border border-cosmic-light/30 bg-cosmic-dark/50 px-3 py-2 text-base text-cosmic-light"
                     value={generalSettings.language}
                     onChange={handleGeneralSettingsChange}
                   >
@@ -165,7 +164,7 @@ const AdminSettings = () => {
                   <select 
                     id="timeZone"
                     name="timeZone"
-                    className="w-full h-10 rounded-md border border-cosmic-light/20 bg-cosmic-dark/30 px-3 py-2 text-base text-cosmic-light"
+                    className="w-full h-10 rounded-md border border-cosmic-light/30 bg-cosmic-dark/50 px-3 py-2 text-base text-cosmic-light"
                   >
                     <option value="UTC">UTC</option>
                     <option value="EST">Eastern Time (EST)</option>
@@ -177,7 +176,7 @@ const AdminSettings = () => {
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={() => handleSaveSettings('general')}
                 disabled={isLoading}
               >
@@ -192,7 +191,7 @@ const AdminSettings = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Security Settings</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Configure security options for your admin panel
               </CardDescription>
             </CardHeader>
@@ -225,7 +224,7 @@ const AdminSettings = () => {
                   <Input 
                     id="passwordExpiry"
                     type="number"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={securitySettings.passwordExpiry}
                     onChange={e => setSecuritySettings({...securitySettings, passwordExpiry: parseInt(e.target.value)})}
                   />
@@ -235,7 +234,7 @@ const AdminSettings = () => {
                   <Input 
                     id="sessionTimeout"
                     type="number"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={securitySettings.sessionTimeout}
                     onChange={e => setSecuritySettings({...securitySettings, sessionTimeout: parseInt(e.target.value)})}
                   />
@@ -257,7 +256,7 @@ const AdminSettings = () => {
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={() => handleSaveSettings('security')}
                 disabled={isLoading}
               >
@@ -272,7 +271,7 @@ const AdminSettings = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Notification Preferences</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Choose which notifications you want to receive
               </CardDescription>
             </CardHeader>
@@ -324,7 +323,7 @@ const AdminSettings = () => {
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={() => handleSaveSettings('notification')}
                 disabled={isLoading}
               >
@@ -339,7 +338,7 @@ const AdminSettings = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Account Settings</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Update your account information
               </CardDescription>
             </CardHeader>
@@ -349,7 +348,7 @@ const AdminSettings = () => {
                   <Label htmlFor="accountName" className="text-cosmic-light">Name</Label>
                   <Input 
                     id="accountName"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     defaultValue="Admin User"
                   />
                 </div>
@@ -357,8 +356,8 @@ const AdminSettings = () => {
                   <Label htmlFor="accountEmail" className="text-cosmic-light">Email</Label>
                   <Input 
                     id="accountEmail"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
-                    defaultValue="admin@astral.com"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
+                    defaultValue="admin@astrojanak.com"
                   />
                 </div>
               </div>
@@ -377,7 +376,7 @@ const AdminSettings = () => {
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={() => handleSaveSettings('account')}
                 disabled={isLoading}
               >
@@ -391,7 +390,7 @@ const AdminSettings = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">Appearance Settings</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Customize how the admin panel looks
               </CardDescription>
             </CardHeader>
@@ -453,7 +452,7 @@ const AdminSettings = () => {
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={() => handleSaveSettings('appearance')}
                 disabled={isLoading}
               >

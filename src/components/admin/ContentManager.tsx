@@ -179,7 +179,7 @@ const ContentManager = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-cosmic-light">Content Management</h1>
         <Button 
-          className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+          className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
           onClick={handleCreateContent}
         >
           <Plus className="mr-2 h-4 w-4" />
@@ -190,11 +190,11 @@ const ContentManager = () => {
       <Tabs defaultValue="pages" className="space-y-4" onValueChange={setCurrentTab}>
         <div className="cosmic-glass p-1.5 rounded-lg inline-block">
           <TabsList className="bg-cosmic-dark/30">
-            <TabsTrigger value="pages" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="pages" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <FileText className="mr-2 h-4 w-4" />
               Pages
             </TabsTrigger>
-            <TabsTrigger value="blog" className="data-[state=active]:bg-cosmic-accent/20">
+            <TabsTrigger value="blog" className="data-[state=active]:bg-cosmic-accent/40 data-[state=active]:text-cosmic-light text-cosmic-accent">
               <PenTool className="mr-2 h-4 w-4" />
               Blog Posts
             </TabsTrigger>
@@ -205,46 +205,46 @@ const ContentManager = () => {
           <Card className="cosmic-glass">
             <CardHeader>
               <CardTitle className="text-cosmic-light">{currentTab === "pages" ? "Pages" : "Blog Posts"}</CardTitle>
-              <CardDescription className="text-cosmic-light/70">
+              <CardDescription className="text-cosmic-accent">
                 Manage your {currentTab === "pages" ? "website pages" : "blog content"} here
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow className="hover:bg-cosmic-dark/20 border-cosmic-light/10">
-                    <TableHead className="text-cosmic-light/70">Title</TableHead>
-                    <TableHead className="text-cosmic-light/70">Slug</TableHead>
-                    <TableHead className="text-cosmic-light/70">Status</TableHead>
-                    <TableHead className="text-cosmic-light/70">Last Modified</TableHead>
-                    <TableHead className="text-cosmic-light/70">Author</TableHead>
-                    <TableHead className="text-cosmic-light/70">Actions</TableHead>
+                  <TableRow className="hover:bg-cosmic-dark/20 border-cosmic-light/20">
+                    <TableHead className="text-cosmic-light">Title</TableHead>
+                    <TableHead className="text-cosmic-light">Slug</TableHead>
+                    <TableHead className="text-cosmic-light">Status</TableHead>
+                    <TableHead className="text-cosmic-light">Last Modified</TableHead>
+                    <TableHead className="text-cosmic-light">Author</TableHead>
+                    <TableHead className="text-cosmic-light">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {contentList.map((content) => (
-                    <TableRow key={content.id} className="hover:bg-cosmic-dark/20 border-cosmic-light/10 group">
+                    <TableRow key={content.id} className="hover:bg-cosmic-dark/20 border-cosmic-light/20 group">
                       <TableCell className="text-cosmic-light font-medium">{content.title}</TableCell>
-                      <TableCell className="text-cosmic-light">{content.slug}</TableCell>
+                      <TableCell className="text-cosmic-accent">{content.slug}</TableCell>
                       <TableCell>
                         <span className={`px-2 py-1 rounded-full text-xs ${
-                          content.status === "published" ? "bg-green-500/20 text-green-300" : 
-                          "bg-amber-500/20 text-amber-300"
+                          content.status === "published" ? "bg-green-500/30 text-green-300" : 
+                          "bg-amber-500/30 text-amber-300"
                         }`}>
                           {content.status}
                         </span>
                       </TableCell>
-                      <TableCell className="text-cosmic-light">{content.modified}</TableCell>
-                      <TableCell className="text-cosmic-light">{content.author}</TableCell>
+                      <TableCell className="text-cosmic-accent">{content.modified}</TableCell>
+                      <TableCell className="text-cosmic-accent">{content.author}</TableCell>
                       <TableCell>
-                        <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent" onClick={() => handleViewContent(content)}>
+                        <div className="flex space-x-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-cosmic-light hover:bg-cosmic-light/20" onClick={() => handleViewContent(content)}>
                             <Eye className="h-4 w-4" />
                           </Button>
-                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-cosmic-accent" onClick={() => handleEditContent(content)}>
+                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-cosmic-light hover:bg-cosmic-light/20" onClick={() => handleEditContent(content)}>
                             <FileEdit className="h-4 w-4" />
                           </Button>
-                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-destructive" onClick={() => handleDeleteContent(content.id)}>
+                          <Button size="icon" variant="ghost" className="h-8 w-8 text-cosmic-light hover:text-destructive hover:bg-destructive/20" onClick={() => handleDeleteContent(content.id)}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
@@ -253,7 +253,7 @@ const ContentManager = () => {
                   ))}
                   {contentList.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-4 text-cosmic-light/70">
+                      <TableCell colSpan={6} className="text-center py-4 text-cosmic-accent">
                         No {currentTab === "pages" ? "pages" : "blog posts"} found.
                       </TableCell>
                     </TableRow>
@@ -269,14 +269,14 @@ const ContentManager = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="cosmic-glass text-cosmic-light max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-cosmic-accent">
+            <DialogTitle className="text-cosmic-light text-xl">
               {isEditing ? (
                 selectedContent ? 
                 `Edit ${currentTab === "pages" ? "Page" : "Blog Post"}` : 
                 `Create New ${currentTab === "pages" ? "Page" : "Blog Post"}`
               ) : `View ${currentTab === "pages" ? "Page" : "Blog Post"}`}
             </DialogTitle>
-            <DialogDescription className="text-cosmic-light/70">
+            <DialogDescription className="text-cosmic-accent">
               {isEditing ? 
                 "Fill in the details below to save your content" : 
                 selectedContent ? `Viewing: ${selectedContent.title}` : ""}
@@ -291,7 +291,7 @@ const ContentManager = () => {
                   <Input 
                     id="title"
                     name="title"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={editForm.title}
                     onChange={handleSlugChange}
                     placeholder="Page title"
@@ -302,7 +302,7 @@ const ContentManager = () => {
                   <Input 
                     id="slug"
                     name="slug"
-                    className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light"
+                    className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
                     value={editForm.slug}
                     onChange={handleFormChange}
                     placeholder="page-slug"
@@ -316,7 +316,7 @@ const ContentManager = () => {
                   <Button
                     type="button"
                     variant={editForm.status === "draft" ? "default" : "outline"}
-                    className={editForm.status === "draft" ? "bg-cosmic-accent text-cosmic-light" : "border-cosmic-light/20"}
+                    className={editForm.status === "draft" ? "bg-cosmic-light text-cosmic-dark" : "border-cosmic-light/30 text-cosmic-light"}
                     onClick={() => setEditForm(prev => ({ ...prev, status: "draft" }))}
                   >
                     Draft
@@ -324,7 +324,7 @@ const ContentManager = () => {
                   <Button
                     type="button"
                     variant={editForm.status === "published" ? "default" : "outline"}
-                    className={editForm.status === "published" ? "bg-cosmic-accent text-cosmic-light" : "border-cosmic-light/20"}
+                    className={editForm.status === "published" ? "bg-cosmic-light text-cosmic-dark" : "border-cosmic-light/30 text-cosmic-light"}
                     onClick={() => setEditForm(prev => ({ ...prev, status: "published" }))}
                   >
                     Published
@@ -338,7 +338,7 @@ const ContentManager = () => {
                   id="content"
                   name="content"
                   rows={15}
-                  className="bg-cosmic-dark/30 border-cosmic-light/20 text-cosmic-light font-mono"
+                  className="bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light font-mono"
                   value={editForm.content}
                   onChange={handleFormChange}
                   placeholder="Enter your content here..."
@@ -348,7 +348,7 @@ const ContentManager = () => {
               <div className="flex items-center space-x-4">
                 <Button
                   variant="outline"
-                  className="border-cosmic-light/20 text-cosmic-light hover:bg-cosmic-accent/20"
+                  className="border-cosmic-light/30 text-cosmic-light hover:bg-cosmic-light/20"
                   onClick={() => {
                     const fileInput = document.createElement('input');
                     fileInput.type = 'file';
@@ -369,28 +369,28 @@ const ContentManager = () => {
             </div>
           ) : selectedContent && (
             <div className="space-y-4">
-              <div className="bg-cosmic-dark/30 p-4 rounded-lg">
+              <div className="bg-cosmic-dark/50 p-4 rounded-lg border border-cosmic-light/20">
                 <div className="flex justify-between">
                   <div>
-                    <span className="text-cosmic-light/70">Slug:</span>
+                    <span className="text-cosmic-accent">Slug:</span>
                     <span className="text-cosmic-light ml-2">{selectedContent.slug}</span>
                   </div>
                   <span className={`px-2 py-1 rounded-full text-xs ${
-                    selectedContent.status === "published" ? "bg-green-500/20 text-green-300" : 
-                    "bg-amber-500/20 text-amber-300"
+                    selectedContent.status === "published" ? "bg-green-500/30 text-green-300" : 
+                    "bg-amber-500/30 text-amber-300"
                   }`}>
                     {selectedContent.status}
                   </span>
                 </div>
                 <div className="mt-2">
-                  <span className="text-cosmic-light/70">Last Modified:</span>
+                  <span className="text-cosmic-accent">Last Modified:</span>
                   <span className="text-cosmic-light ml-2">{selectedContent.modified} by {selectedContent.author}</span>
                 </div>
               </div>
               
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold text-cosmic-light">{selectedContent.title}</h2>
-                <div className="bg-cosmic-dark/30 p-4 rounded-lg min-h-[300px] whitespace-pre-line">
+                <div className="bg-cosmic-dark/50 p-4 rounded-lg border border-cosmic-light/20 min-h-[300px] whitespace-pre-line text-cosmic-light">
                   {selectedContent.content || "No content yet"}
                 </div>
               </div>
@@ -400,7 +400,7 @@ const ContentManager = () => {
           <DialogFooter>
             {isEditing ? (
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium animate-button-pulse"
                 onClick={handleSaveContent}
               >
                 <Save className="mr-2 h-4 w-4" />
@@ -408,7 +408,7 @@ const ContentManager = () => {
               </Button>
             ) : (
               <Button 
-                className="bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/80"
+                className="bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 font-medium"
                 onClick={() => setIsEditing(true)}
               >
                 <FileEdit className="mr-2 h-4 w-4" />

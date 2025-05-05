@@ -21,8 +21,8 @@
 
 /* Enhanced cosmic glass effect */
 .cosmic-glass {
-  @apply bg-black/70 backdrop-blur-xl border border-cosmic-light/20 shadow-lg hover:shadow-xl transition-shadow duration-300;
-  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.2);
+  @apply bg-black/70 backdrop-blur-xl border border-cosmic-light/30 shadow-lg hover:shadow-xl transition-shadow duration-300;
+  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.3);
 }
 
 /* Card hover effect */
@@ -40,12 +40,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-cosmic-light/30 rounded-full hover:bg-cosmic-light/40 transition-colors;
+  @apply bg-cosmic-light/40 rounded-full hover:bg-cosmic-light/60 transition-colors;
 }
 
 /* Enhanced text glow */
 .text-glow {
-  text-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+  text-shadow: 0 0 20px rgba(255, 87, 34, 0.4);
 }
 
 /* Card shine effect */
@@ -111,4 +111,39 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
   }
+}
+
+/* Add more visible form elements */
+input, select, textarea {
+  @apply bg-cosmic-dark/40 border-cosmic-light/30 text-cosmic-light placeholder:text-cosmic-light/50;
+}
+
+/* Enhanced sidebar styles */
+.sidebar-item-active {
+  @apply bg-cosmic-light/20 text-cosmic-light;
+}
+
+/* Improve text contrast */
+.text-high-contrast {
+  @apply text-cosmic-light font-medium;
+}
+
+/* Improve card visibility */
+.card-enhanced {
+  @apply bg-cosmic-dark/60 border-cosmic-light/30 text-cosmic-light;
+}
+
+/* Highlight animations */
+.highlight-pulse {
+  animation: highlight-pulse 2s infinite;
+}
+
+@keyframes highlight-pulse {
+  0%, 100% { border-color: rgba(255, 87, 34, 0.3); }
+  50% { border-color: rgba(255, 87, 34, 0.7); }
+}
+
+/* Improved tab highlighting */
+.tab-active {
+  @apply bg-cosmic-light/30 text-cosmic-light;
 }

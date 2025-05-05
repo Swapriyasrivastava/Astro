@@ -27,14 +27,16 @@ export default {
           dark: "#000000", // Black from logo background
           light: "#FF5722", // Orange from logo
           accent: "#FF7043", // Lighter orange for accents
+          text: "#FFA07A", // Light Salmon for text
+          highlight: "#FFCCBC", // Very light orange for highlights
         },
         sidebar: {
-          DEFAULT: "#FFFFFF", // Pure white
-          foreground: "#8B5A2B", // Brown from logo
+          DEFAULT: "#0A0A0A", // Very dark background
+          foreground: "#FF5722", // Orange from logo
           primary: "#8B5A2B", // Brown from logo
           'primary-foreground': "#FFFFFF", // White
           accent: "#FF5722", // Orange from logo
-          border: "#E2E8F0", // Light gray border
+          border: "#333333", // Dark gray border
         }
       },
       borderRadius: {
@@ -82,6 +84,10 @@ export default {
         'button-pulse': {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.05)' },
+        },
+        'border-glow': {
+          '0%, 100%': { borderColor: 'rgba(255, 87, 34, 0.3)' },
+          '50%': { borderColor: 'rgba(255, 87, 34, 0.8)' },
         }
       },
       animation: {
@@ -95,10 +101,11 @@ export default {
         'card-float': 'card-hover 3s ease-in-out infinite',
         'soft-glow': 'glow 3s ease-in-out infinite',
         'button-pulse': 'button-pulse 2s ease-in-out infinite',
+        'border-glow': 'border-glow 3s ease-in-out infinite',
       },
       backgroundImage: {
         'cosmic-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #000000 100%)',
-        'card-gradient': 'linear-gradient(to right bottom, #FFFFFF, #F8FAFC)',
+        'card-gradient': 'linear-gradient(to right bottom, #0A0A0A, #111111)',
       }
     }
   },

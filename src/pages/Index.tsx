@@ -24,9 +24,9 @@ const Index = () => {
       <div className="container mx-auto px-4 text-center max-w-3xl z-10">
         <div className="animate-float mb-4">
           <img 
-            src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+            src="/lovable-uploads/a05f37b6-9dd7-431e-aa94-20ce9e891375.png" 
             alt="astroJanak Logo" 
-            className="h-32 mx-auto object-contain"
+            className="h-48 mx-auto object-contain"
           />
         </div>
         
