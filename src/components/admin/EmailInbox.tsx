@@ -71,16 +71,28 @@ const sampleEmails = [
   }
 ];
 
+interface EmailType {
+  id: number;
+  sender: string;
+  email: string;
+  subject: string;
+  message: string;
+  date: string;
+  read: boolean;
+  starred: boolean;
+  label: string;
+}
+
 const EmailInbox = () => {
   const { toast } = useToast();
-  const [emails, setEmails] = useState(sampleEmails);
-  const [selectedEmail, setSelectedEmail] = useState(null);
-  const [isReplyOpen, setIsReplyOpen] = useState(false);
-  const [replyContent, setReplyContent] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentTab, setCurrentTab] = useState("inbox");
+  const [emails, setEmails] = useState<EmailType[]>(sampleEmails);
+  const [selectedEmail, setSelectedEmail] = useState<EmailType | null>(null);
+  const [isReplyOpen, setIsReplyOpen] = useState<boolean>(false);
+  const [replyContent, setReplyContent] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentTab, setCurrentTab] = useState<string>("inbox");
   
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
   
@@ -100,7 +112,7 @@ const EmailInbox = () => {
     return matchesSearch && matchesTab;
   });
   
-  const handleEmailClick = (email) => {
+  const handleEmailClick = (email: EmailType) => {
     setSelectedEmail(email);
     
     // Mark as read
@@ -111,13 +123,13 @@ const EmailInbox = () => {
     }
   };
   
-  const handleStarEmail = (id) => {
+  const handleStarEmail = (id: number) => {
     setEmails(emails.map(email => 
       email.id === id ? { ...email, starred: !email.starred } : email
     ));
   };
   
-  const handleDeleteEmail = (id) => {
+  const handleDeleteEmail = (id: number) => {
     setEmails(emails.filter(email => email.id !== id));
     setSelectedEmail(null);
     toast({
@@ -142,19 +154,19 @@ const EmailInbox = () => {
     
     toast({
       title: "Reply Sent",
-      description: `Your reply to ${selectedEmail.sender} has been sent`
+      description: `Your reply to ${selectedEmail?.sender} has been sent`
     });
     
     setIsReplyOpen(false);
     setReplyContent("");
   };
   
-  const formatEmailDate = (dateString) => {
+  const formatEmailDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
   
-  const getLabelColor = (label) => {
+  const getLabelColor = (label: string) => {
     switch(label) {
       case "client": return "bg-blue-500/20 text-blue-300";
       case "inquiry": return "bg-amber-500/20 text-amber-300";
@@ -340,7 +352,7 @@ const EmailInbox = () => {
                               <Star className={`h-4 w-4 ${email.starred ? 'fill-cosmic-accent text-cosmic-accent' : ''}`} />
                             </Button>
                             
-                            <Avatar className="h-8 w-8 bg-cosmic-accent/20 border border-cosmic-light/30">
+                            <Avatar className="h-8 w-8 bg-cosmic-accent/20 border border-cosmic-light/30 animate-pulse">
                               <AvatarFallback className="text-cosmic-light">
                                 {email.sender.split(' ').map(n => n[0]).join('')}
                               </AvatarFallback>
