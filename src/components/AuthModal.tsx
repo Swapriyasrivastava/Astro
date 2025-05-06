@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
-import { Mail, Lock, Key, Sparkles } from "lucide-react";
+import { Mail, Lock, Key } from "lucide-react";
 
 const securityQuestion = "In which city were you born?";
 
@@ -78,17 +77,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
         
         <DialogHeader className="relative z-10">
           <DialogTitle className="flex flex-col items-center gap-3 mb-4">
-            <div className="relative">
-              <div className="absolute inset-0 animate-pulse-star">
-                <Sparkles className="w-8 h-8 text-cosmic absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-              </div>
-              <div className="animate-float">
-                <img 
-                  src="/lovable-uploads/e661b3c3-4eb4-4418-9441-b945d5524d70.png" 
-                  alt="astroJanak Logo" 
-                  className="h-24 object-contain"
-                />
-              </div>
+            <div className="animate-float">
+              <img 
+                src="/lovable-uploads/e661b3c3-4eb4-4418-9441-b945d5524d70.png" 
+                alt="astroJanak Logo" 
+                className="h-24 object-contain"
+              />
             </div>
             <span className="text-2xl font-bold text-cosmic mt-3">
               astroJanak Access Portal

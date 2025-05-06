@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -298,10 +297,25 @@ input, select, textarea {
 
 /* Fix action buttons in user management */
 .action-button {
-  @apply bg-cosmic/10 hover:bg-cosmic/20 text-cosmic hover:text-cosmic-accent p-1.5 rounded-md transition-all;
+  @apply bg-cosmic/20 hover:bg-cosmic/30 text-cosmic-dark hover:text-cosmic p-1.5 rounded-md transition-all;
 }
 
 /* Improved action icons visibility */
 .action-icon {
-  @apply text-cosmic hover:text-cosmic-accent transition-colors;
+  @apply text-cosmic-dark hover:text-cosmic transition-colors;
+}
+
+/* Blog content improved visibility */
+.blog-content p,
+.blog-content h2,
+.blog-content h3 {
+  @apply text-cosmic-dark;
+}
+
+/* Improved text contrast for settings */
+.settings-page h2, 
+.settings-page h3, 
+.settings-page label, 
+.settings-page p {
+  @apply text-cosmic-dark font-medium;
 }

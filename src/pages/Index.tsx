@@ -18,7 +18,7 @@ const Index = () => {
   }, [user, navigate]);
   
   return (
-    <div className="min-h-screen relative overflow-hidden flex flex-col justify-center items-center">
+    <div className="min-h-screen relative overflow-hidden flex flex-col justify-start items-center pt-24">
       <StarField />
       
       <div className="container mx-auto px-4 text-center max-w-2xl z-10 flex flex-col items-center">
