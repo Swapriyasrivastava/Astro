@@ -10,12 +10,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-cosmic-light text-cosmic-dark hover:bg-cosmic-light/90 shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
+        default: "bg-cosmic text-white hover:bg-cosmic-accent shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
         destructive: "bg-red-500 text-white hover:bg-red-600 shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
-        secondary: "bg-cosmic-accent text-cosmic-light hover:bg-cosmic-accent/90 shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
-        outline: "border border-cosmic-light/30 text-cosmic-light hover:border-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-light/10 shadow-sm hover:shadow-md hover:scale-105 enhanced-btn-transition",
-        ghost: "text-cosmic-light hover:bg-cosmic-light/10 hover:text-cosmic-light hover:scale-105 enhanced-btn-transition",
-        link: "text-cosmic-light underline-offset-4 hover:underline hover:text-cosmic-accent enhanced-btn-transition",
+        secondary: "bg-cosmic/80 text-white hover:bg-cosmic shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
+        outline: "border border-cosmic/30 text-cosmic hover:border-cosmic hover:text-white hover:bg-cosmic/80 shadow-sm hover:shadow-md hover:scale-105 enhanced-btn-transition",
+        ghost: "text-cosmic-dark hover:bg-cosmic/10 hover:text-cosmic hover:scale-105 enhanced-btn-transition",
+        link: "text-cosmic underline-offset-4 hover:underline hover:text-cosmic-accent enhanced-btn-transition",
       },
       size: {
         default: "h-10 px-4 py-2",

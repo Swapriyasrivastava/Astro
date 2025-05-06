@@ -78,9 +78,9 @@ const AdminPanel = () => {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen w-full bg-cosmic-dark">
+      <div className="flex min-h-screen w-full bg-gradient-to-br from-white to-cosmic/5">
         {/* Sidebar */}
-        <Sidebar className="border-cosmic-light/30 animate-fade-in">
+        <Sidebar className="admin-sidebar border-cosmic/20 shadow-md animate-fade-in">
           <SidebarHeader>
             <div className="flex items-center px-2">
               <img 
@@ -93,7 +93,7 @@ const AdminPanel = () => {
           
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel className="text-cosmic-light">Main</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-cosmic font-medium">Main</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -101,7 +101,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'dashboard'} 
                       tooltip="Dashboard"
                       onClick={() => handleMenuClick('dashboard')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <LayoutDashboard className="h-4 w-4" />
                       <span>Dashboard</span>
@@ -112,7 +112,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'orders'} 
                       tooltip="Orders"
                       onClick={() => handleMenuClick('orders')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Package className="h-4 w-4" />
                       <span>Orders</span>
@@ -123,7 +123,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'horoscopes'} 
                       tooltip="Horoscopes"
                       onClick={() => handleMenuClick('horoscopes')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Star className="h-4 w-4" />
                       <span>Horoscopes</span>
@@ -134,7 +134,7 @@ const AdminPanel = () => {
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel className="text-cosmic-light">Pages</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-cosmic font-medium">Pages</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -142,7 +142,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'about'} 
                       tooltip="About"
                       onClick={() => handleMenuClick('about')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Book className="h-4 w-4" />
                       <span>About</span>
@@ -153,7 +153,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'blog'} 
                       tooltip="Blog"
                       onClick={() => handleMenuClick('blog')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <FileText className="h-4 w-4" />
                       <span>Blog</span>
@@ -164,7 +164,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'contact'} 
                       tooltip="Contact"
                       onClick={() => handleMenuClick('contact')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Contact className="h-4 w-4" />
                       <span>Contact</span>
@@ -175,7 +175,7 @@ const AdminPanel = () => {
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel className="text-cosmic-light">Application</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-cosmic font-medium">Application</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -183,7 +183,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'kundli'} 
                       tooltip="Kundli Manager"
                       onClick={() => handleMenuClick('kundli')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Star className="h-4 w-4" />
                       <span>Kundli Manager</span>
@@ -194,7 +194,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'users'} 
                       tooltip="User Manager"
                       onClick={() => handleMenuClick('users')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Users className="h-4 w-4" />
                       <span>User Manager</span>
@@ -205,7 +205,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'content'} 
                       tooltip="Content Manager"
                       onClick={() => handleMenuClick('content')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <FileText className="h-4 w-4" />
                       <span>Content Manager</span>
@@ -216,7 +216,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'payments'} 
                       tooltip="Payment Manager"
                       onClick={() => handleMenuClick('payments')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <CreditCard className="h-4 w-4" />
                       <span>Payment Manager</span>
@@ -227,7 +227,7 @@ const AdminPanel = () => {
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel className="text-cosmic-light">System</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-cosmic font-medium">System</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -235,7 +235,7 @@ const AdminPanel = () => {
                       isActive={currentView === 'settings'}
                       tooltip="Settings"
                       onClick={() => handleMenuClick('settings')}
-                      className={`transition-all duration-300 text-white`}
+                      className={`transition-all duration-300 text-cosmic-dark`}
                     >
                       <Settings className="h-4 w-4" />
                       <span>Settings</span>
@@ -251,7 +251,7 @@ const AdminPanel = () => {
               <Button
                 onClick={logout}
                 variant="outline"
-                className="w-full justify-start text-white hover:bg-cosmic-light/20 hover:text-cosmic-light border-cosmic-light/30 btn-hover-effect animate-border-glow"
+                className="w-full justify-start text-cosmic-dark hover:bg-cosmic/20 hover:text-cosmic border-cosmic/30 btn-hover-effect"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
@@ -261,18 +261,18 @@ const AdminPanel = () => {
         </Sidebar>
 
         <SidebarInset>
-          <nav className="cosmic-glass border-b border-cosmic-light/30 sticky top-0 z-50 animate-fade-in">
+          <nav className="bg-white/80 backdrop-blur-xl border-b border-cosmic/30 sticky top-0 z-50 animate-fade-in shadow-sm">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
-                  <span className="text-xl font-bold text-cosmic-light text-glow">
+                  <span className="text-xl font-bold text-cosmic text-glow">
                     {currentView.charAt(0).toUpperCase() + currentView.slice(1)}
                   </span>
                   <div className="ml-4 relative">
                     <Input 
                       type="text" 
                       placeholder="Search..." 
-                      className="w-60 bg-cosmic-dark/50 border-cosmic-light/30 text-cosmic-light"
+                      className="w-60 bg-white/80 border-cosmic/30 text-cosmic-dark"
                       onChange={() => toast({ title: "Search", description: "Search functionality coming soon" })}
                     />
                   </div>
@@ -282,50 +282,50 @@ const AdminPanel = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="relative animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
+                    className="relative animate-fade-in hover:bg-cosmic/10 btn-hover-effect text-cosmic-dark"
                     onClick={() => toast({ 
                       title: "Notifications", 
                       description: "You have 3 unread notifications" 
                     })}
                   >
-                    <Bell className="text-white" />
+                    <Bell className="text-cosmic-dark" />
                     {notifications > 0 && (
-                      <span className="absolute top-1 right-1 w-2 h-2 bg-cosmic-light rounded-full animate-pulse"></span>
+                      <span className="absolute top-1 right-1 w-2 h-2 bg-cosmic rounded-full animate-pulse"></span>
                     )}
                   </Button>
                   
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="animate-fade-in hover:bg-cosmic-light/20 btn-hover-effect text-white"
+                    className="animate-fade-in hover:bg-cosmic/10 btn-hover-effect text-cosmic-dark"
                     onClick={() => toast({ 
                       title: "Theme Settings", 
                       description: "Toggle between light and dark mode" 
                     })}
                   >
-                    <Sun className="text-white" />
+                    <Sun className="text-cosmic-dark" />
                   </Button>
                   
                   <div className="relative group">
-                    <Avatar className="h-8 w-8 transition-transform hover:scale-110 bg-cosmic-light/20 border border-cosmic-light/30 avatar-glow">
-                      <AvatarFallback className="bg-cosmic-light/20 text-cosmic-light">
+                    <Avatar className="h-8 w-8 transition-transform hover:scale-110 bg-cosmic/10 border border-cosmic/30 avatar-glow">
+                      <AvatarFallback className="bg-cosmic/10 text-cosmic">
                         <User className="h-4 w-4" />
                       </AvatarFallback>
                     </Avatar>
                     
                     <div className="absolute right-0 mt-2 w-48 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 z-50">
-                      <div className="cosmic-glass py-2 rounded-md shadow-xl">
-                        <div className="px-4 py-2 text-sm text-cosmic-light">{user.username}</div>
-                        <div className="border-t border-cosmic-light/20"></div>
+                      <div className="bg-white/95 py-2 rounded-md shadow-xl border border-cosmic/20">
+                        <div className="px-4 py-2 text-sm text-cosmic-dark">{user.username}</div>
+                        <div className="border-t border-cosmic/20"></div>
                         <button
                           onClick={() => handleMenuClick('settings')}
-                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-light/20 transition-colors"
+                          className="w-full text-left px-4 py-2 text-sm text-cosmic-dark hover:bg-cosmic/10 transition-colors"
                         >
                           Settings
                         </button>
                         <button
                           onClick={logout}
-                          className="w-full text-left px-4 py-2 text-sm text-cosmic-light hover:bg-cosmic-light/20 transition-colors"
+                          className="w-full text-left px-4 py-2 text-sm text-cosmic-dark hover:bg-cosmic/10 transition-colors"
                         >
                           Sign out
                         </button>
@@ -337,7 +337,7 @@ const AdminPanel = () => {
             </div>
           </nav>
 
-          <div className="container mx-auto px-4 py-6">
+          <div className="container mx-auto px-4 py-6 admin-content min-h-[calc(100vh-64px)]">
             {renderView()}
           </div>
         </SidebarInset>

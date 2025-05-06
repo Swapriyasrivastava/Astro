@@ -24,19 +24,19 @@ export default {
         foreground: "#2D3748", // Softer dark text
         cosmic: {
           DEFAULT: "#8B5A2B", // Brown from logo
-          dark: "#000000", // Black from logo background
+          dark: "#3D2914", // Darker brown for contrast
           light: "#FF5722", // Orange from logo
           accent: "#FF7043", // Lighter orange for accents
-          text: "#FFA07A", // Light Salmon for text
-          highlight: "#FFCCBC", // Very light orange for highlights
+          text: "#8B5A2B", // Brown for text 
+          highlight: "#FFF3E0", // Very light orange for highlights
         },
         sidebar: {
-          DEFAULT: "#0A0A0A", // Very dark background
-          foreground: "#FF5722", // Orange from logo
+          DEFAULT: "#FFFFFF", // White background
+          foreground: "#8B5A2B", // Brown from logo
           primary: "#8B5A2B", // Brown from logo
           'primary-foreground': "#FFFFFF", // White
           accent: "#FF5722", // Orange from logo
-          border: "#333333", // Dark gray border
+          border: "#E2E8F0", // Light gray border
         }
       },
       borderRadius: {
@@ -78,16 +78,16 @@ export default {
           '50%': { transform: 'translateY(-5px)' },
         },
         'glow': {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(255, 87, 34, 0.3)' },
-          '50%': { boxShadow: '0 0 25px rgba(255, 87, 34, 0.5)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(139, 90, 43, 0.3)' },
+          '50%': { boxShadow: '0 0 25px rgba(139, 90, 43, 0.5)' },
         },
         'button-pulse': {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.05)' },
         },
         'border-glow': {
-          '0%, 100%': { borderColor: 'rgba(255, 87, 34, 0.3)' },
-          '50%': { borderColor: 'rgba(255, 87, 34, 0.8)' },
+          '0%, 100%': { borderColor: 'rgba(139, 90, 43, 0.3)' },
+          '50%': { borderColor: 'rgba(139, 90, 43, 0.8)' },
         }
       },
       animation: {
@@ -104,8 +104,8 @@ export default {
         'border-glow': 'border-glow 3s ease-in-out infinite',
       },
       backgroundImage: {
-        'cosmic-gradient': 'linear-gradient(135deg, #1A1A1A 0%, #000000 100%)',
-        'card-gradient': 'linear-gradient(to right bottom, #0A0A0A, #111111)',
+        'cosmic-gradient': 'linear-gradient(135deg, #FFF9F5 0%, #FFF0E5 100%)',
+        'card-gradient': 'linear-gradient(to right bottom, #FFFFFF, #FFF9F5)',
       }
     }
   },
