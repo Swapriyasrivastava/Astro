@@ -114,57 +114,57 @@ const BlogPage = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {isEditing ? (
-        <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5">
+        <Card className="cosmic-glass bg-white/90 border-cosmic/20">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-cosmic-light">
+            <CardTitle className="text-2xl font-bold text-cosmic">
               {selectedBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div>
-                <label className="block text-cosmic-light mb-2">Title</label>
+                <label className="block text-cosmic-dark mb-2 font-medium">Title</label>
                 <input
                   type="text"
                   value={editForm.title}
                   onChange={(e) => setEditForm({...editForm, title: e.target.value})}
-                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  className="w-full p-2 rounded bg-white/90 border border-cosmic/20 text-cosmic-dark"
                 />
               </div>
               <div>
-                <label className="block text-cosmic-light mb-2">Category</label>
+                <label className="block text-cosmic-dark mb-2 font-medium">Category</label>
                 <input
                   type="text"
                   value={editForm.category}
                   onChange={(e) => setEditForm({...editForm, category: e.target.value})}
-                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  className="w-full p-2 rounded bg-white/90 border border-cosmic/20 text-cosmic-dark"
                 />
               </div>
               <div>
-                <label className="block text-cosmic-light mb-2">Excerpt</label>
+                <label className="block text-cosmic-dark mb-2 font-medium">Excerpt</label>
                 <textarea
                   value={editForm.excerpt}
                   onChange={(e) => setEditForm({...editForm, excerpt: e.target.value})}
-                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  className="w-full p-2 rounded bg-white/90 border border-cosmic/20 text-cosmic-dark"
                   rows={3}
                 />
               </div>
               <div>
-                <label className="block text-cosmic-light mb-2">Content</label>
+                <label className="block text-cosmic-dark mb-2 font-medium">Content</label>
                 <textarea
                   value={editForm.content}
                   onChange={(e) => setEditForm({...editForm, content: e.target.value})}
-                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  className="w-full p-2 rounded bg-white/90 border border-cosmic/20 text-cosmic-dark"
                   rows={10}
                 />
               </div>
               <div>
-                <label className="block text-cosmic-light mb-2">Author</label>
+                <label className="block text-cosmic-dark mb-2 font-medium">Author</label>
                 <input
                   type="text"
                   value={editForm.author}
                   onChange={(e) => setEditForm({...editForm, author: e.target.value})}
-                  className="w-full p-2 rounded bg-cosmic-dark/30 border border-cosmic-light/10 text-cosmic-light"
+                  className="w-full p-2 rounded bg-white/90 border border-cosmic/20 text-cosmic-dark"
                 />
               </div>
             </div>
@@ -176,34 +176,34 @@ const BlogPage = () => {
                 setIsEditing(false);
                 setSelectedBlog(null);
               }}
-              className="border-cosmic-light/10 text-cosmic-light hover:bg-cosmic-accent/20"
+              className="border-cosmic/30 text-cosmic hover:bg-cosmic/10"
             >
               Cancel
             </Button>
             <Button 
               onClick={handleSave}
-              className="bg-cosmic-accent/80 text-cosmic-light hover:bg-cosmic-accent"
+              className="bg-cosmic text-white hover:bg-cosmic-accent"
             >
               {selectedBlog ? 'Update' : 'Create'}
             </Button>
           </CardFooter>
         </Card>
       ) : selectedBlog ? (
-        <Card className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5">
+        <Card className="cosmic-glass bg-white/90 border-cosmic/20">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
-                <div className="text-cosmic-accent text-sm mb-1">{selectedBlog.category}</div>
-                <CardTitle className="text-2xl font-bold text-cosmic-light">{selectedBlog.title}</CardTitle>
-                <div className="text-cosmic-light/70 text-sm mt-2">By {selectedBlog.author} • {selectedBlog.publishDate}</div>
+                <div className="text-cosmic-accent font-medium text-sm mb-1">{selectedBlog.category}</div>
+                <CardTitle className="text-2xl font-bold text-cosmic">{selectedBlog.title}</CardTitle>
+                <div className="text-cosmic-dark/80 text-sm mt-2">By {selectedBlog.author} • {selectedBlog.publishDate}</div>
               </div>
-              <Button variant="ghost" onClick={() => setSelectedBlog(null)} className="text-cosmic-light">
+              <Button variant="ghost" onClick={() => setSelectedBlog(null)} className="text-cosmic hover:bg-cosmic/10">
                 Back to Blog List
               </Button>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-cosmic-light/90 space-y-4 whitespace-pre-line">
+            <div className="text-cosmic-dark space-y-4 whitespace-pre-line font-medium">
               {selectedBlog.content}
             </div>
           </CardContent>
@@ -211,10 +211,10 @@ const BlogPage = () => {
       ) : (
         <>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-cosmic-light">Cosmic Blog</h2>
+            <h2 className="text-2xl font-bold text-cosmic">Cosmic Blog</h2>
             <Button 
               onClick={() => setIsEditing(true)}
-              className="bg-cosmic-accent/80 text-cosmic-light hover:bg-cosmic-accent"
+              className="bg-cosmic text-white hover:bg-cosmic-accent"
             >
               <Plus className="h-4 w-4 mr-2" />
               New Blog Post
@@ -222,21 +222,21 @@ const BlogPage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {blogs.map((blog) => (
-              <Card key={blog.id} className="cosmic-glass bg-cosmic-dark/20 border-cosmic-light/5 hover:bg-cosmic-dark/30 transition-colors">
+              <Card key={blog.id} className="cosmic-glass bg-white/90 border-cosmic/20 hover:bg-white/95 transition-colors">
                 <CardHeader>
-                  <div className="text-cosmic-accent text-sm">{blog.category}</div>
-                  <CardTitle className="text-xl font-bold text-white">{blog.title}</CardTitle>
+                  <div className="text-cosmic-accent font-medium text-sm">{blog.category}</div>
+                  <CardTitle className="text-xl font-bold text-cosmic">{blog.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-white">{blog.excerpt}</p>
+                  <p className="text-cosmic-dark font-medium">{blog.excerpt}</p>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <div className="text-cosmic-light/60 text-sm">By {blog.author} • {blog.publishDate}</div>
+                  <div className="text-cosmic-dark/70 text-sm">By {blog.author} • {blog.publishDate}</div>
                   <div className="flex space-x-2">
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-accent/20"
+                      className="text-cosmic hover:bg-cosmic/10 hover:text-cosmic-accent"
                       onClick={() => setSelectedBlog(blog)}
                     >
                       <Eye className="h-4 w-4 mr-1" />
@@ -245,7 +245,7 @@ const BlogPage = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-cosmic-accent hover:text-cosmic-light hover:bg-cosmic-accent/20"
+                      className="text-cosmic hover:bg-cosmic/10 hover:text-cosmic-accent"
                       onClick={() => handleEdit(blog)}
                     >
                       <Edit className="h-4 w-4 mr-1" />
@@ -254,7 +254,7 @@ const BlogPage = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-destructive hover:text-destructive/80 hover:bg-destructive/20"
+                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
                       onClick={() => handleDelete(blog.id)}
                     >
                       <Trash2 className="h-4 w-4 mr-1" />

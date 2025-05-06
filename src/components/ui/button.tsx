@@ -14,14 +14,16 @@ const buttonVariants = cva(
         destructive: "bg-red-500 text-white hover:bg-red-600 shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
         secondary: "bg-cosmic/80 text-white hover:bg-cosmic shadow-md hover:shadow-lg hover:scale-105 enhanced-btn-transition",
         outline: "border border-cosmic/30 text-cosmic hover:border-cosmic hover:text-white hover:bg-cosmic/80 shadow-sm hover:shadow-md hover:scale-105 enhanced-btn-transition",
-        ghost: "text-cosmic-dark hover:bg-cosmic/10 hover:text-cosmic hover:scale-105 enhanced-btn-transition",
+        ghost: "text-cosmic hover:bg-cosmic/10 hover:text-cosmic-accent hover:scale-105 enhanced-btn-transition",
         link: "text-cosmic underline-offset-4 hover:underline hover:text-cosmic-accent enhanced-btn-transition",
+        action: "bg-cosmic text-white hover:bg-cosmic-accent shadow-sm hover:shadow-md text-xs px-2 py-1 h-auto enhanced-btn-transition",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        xs: "h-7 text-xs px-2 py-1 rounded-sm",
       },
     },
     defaultVariants: {

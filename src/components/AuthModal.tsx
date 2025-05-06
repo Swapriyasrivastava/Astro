@@ -77,20 +77,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = "lo
         <div className="absolute inset-0 bg-gradient-to-br from-white/95 to-cosmic-accent/10 opacity-90 rounded-2xl"></div>
         
         <DialogHeader className="relative z-10">
-          <DialogTitle className="flex flex-col items-center gap-3 mb-2">
+          <DialogTitle className="flex flex-col items-center gap-3 mb-4">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse-star">
                 <Sparkles className="w-8 h-8 text-cosmic absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="animate-float">
                 <img 
-                  src="/lovable-uploads/694b1a6a-b8bb-4b13-b5e3-a906213d3bdb.png" 
+                  src="/lovable-uploads/e661b3c3-4eb4-4418-9441-b945d5524d70.png" 
                   alt="astroJanak Logo" 
-                  className="h-20 object-contain"
+                  className="h-24 object-contain"
                 />
               </div>
             </div>
-            <span className="text-2xl font-bold text-cosmic">
+            <span className="text-2xl font-bold text-cosmic mt-3">
               astroJanak Access Portal
             </span>
           </DialogTitle>

@@ -27,13 +27,13 @@
 
 /* Enhanced cosmic glass effect - now lighter */
 .cosmic-glass {
-  @apply bg-white/80 backdrop-blur-xl border border-cosmic/20 shadow-lg hover:shadow-xl transition-shadow duration-300;
+  @apply bg-white/95 backdrop-blur-xl border border-cosmic/20 shadow-lg hover:shadow-xl transition-shadow duration-300;
   box-shadow: 0 4px 20px rgba(139, 90, 43, 0.15);
 }
 
 /* Dashboard content background - lighter version */
 .dashboard-content {
-  @apply bg-white/90 border border-cosmic/20 rounded-lg shadow-lg text-cosmic-dark;
+  @apply bg-white/95 border border-cosmic/20 rounded-lg shadow-lg text-cosmic-dark;
 }
 
 /* Text colors for select components - adjusted for light theme */
@@ -165,7 +165,7 @@ input, select, textarea {
 
 /* Improve card visibility */
 .card-enhanced {
-  @apply bg-white/90 border-cosmic/30 text-cosmic-dark;
+  @apply bg-white/95 border-cosmic/30 text-cosmic-dark;
 }
 
 /* Logo animation enhanced */
@@ -284,14 +284,24 @@ input, select, textarea {
 
 /* Admin panel redesign for light theme */
 .admin-sidebar {
-  @apply bg-white/90 border-cosmic/20;
+  @apply bg-white/95 border-cosmic/20;
 }
 
 .admin-content {
-  @apply bg-white/80;
+  @apply bg-white/95;
 }
 
 /* Light theme admin cards */
 .admin-card {
-  @apply bg-white/90 border-cosmic/20 shadow-md hover:shadow-lg transition-all duration-300;
+  @apply bg-white/95 border-cosmic/20 shadow-md hover:shadow-lg transition-all duration-300;
+}
+
+/* Fix action buttons in user management */
+.action-button {
+  @apply bg-cosmic/10 hover:bg-cosmic/20 text-cosmic hover:text-cosmic-accent p-1.5 rounded-md transition-all;
+}
+
+/* Improved action icons visibility */
+.action-icon {
+  @apply text-cosmic hover:text-cosmic-accent transition-colors;
 }
